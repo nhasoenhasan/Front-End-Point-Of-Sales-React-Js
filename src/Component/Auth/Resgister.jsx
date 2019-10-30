@@ -30,7 +30,7 @@ const Register = (props) => {
         setInput({ ...input, [nameName]: event.target.value });
     };
    // console.log("VVV")
-   console.log("Respon>",response.status)
+  //  console.log("Respon>",response.status)
     return(
         <div className="container">
          

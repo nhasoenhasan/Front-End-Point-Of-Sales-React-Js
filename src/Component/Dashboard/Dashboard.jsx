@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import {
   Collapse,Navbar,
   NavbarToggler, NavbarBrand,
@@ -11,36 +11,47 @@ import {
 import Productlist from '../Product/Product';
 import {getProduct} from '../Public/Redux/Actions/product';
 import {connect} from 'react-redux';
-import { FaSearch } from 'react-icons/fa';
+import { MdRestaurant } from "react-icons/md";
+import { FaChartLine,FaDatabase } from "react-icons/fa";
 
 const Dashboard = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const initialFormState = { search: "" };
+  const initialFormState = { search: "",
+                             sort: "",
+                              order:"" };
   const [input, setInput] = useState(initialFormState);
 
   const toggle = () => setIsOpen(!isOpen);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const fetchddata=async()=>{
+    console.log("Input =",input)
     await props.dispatch(getProduct (input))
     .then(result => {
-      console.log("Input",input)
-      console.log("Hasil",result)
+      // console.log("Input",input)
+      // console.log("Hasil",result)
     })
     .catch(err => {
       console.log(err);
     });
+  }
+
+  useEffect(()=>{
+    fetchddata()
+  },[input])
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    fetchddata()
   };
 
   const handleChange = nameName => event => {
     setInput({ ...input, [nameName]: event.target.value });
-    
+    // console.log("Inputan",event.target.value)
   };
 
-  // console.log(handleChange());
   return (
     <div >
-      <Navbar color="dark" light className="fixed-top" expand="md"  >
+      <Navbar style={{backgroundColor:"#000000"}} light className="fixed-top" expand="md"  >
         <NavbarBrand className="text-white" href="/">Lawless </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -72,13 +83,21 @@ const Dashboard = (props) => {
             <Input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
             onChange={handleChange("search")}
             value={input.search}></Input>
-            <Button className="btn btn-warning " type="button"
-            onClick={handleSubmit}><FaSearch/></Button>
           </Form>
           </Nav>
         </Collapse>
       </Navbar>
-      <div className="d-flex flex-row">
+      <div className="d-flex flex-row" >
+        <ListGroup style={{width:"10%",position:"fixed",height:"100%",marginTop:"4%",backgroundColor:"#414141"}}>
+          <ListGroupItem style={{backgroundColor:"#414141",color:"#ffffff"}}><MdRestaurant/>Food</ListGroupItem>
+          <ListGroupItem style={{backgroundColor:"#414141",color:"#ffffff"}}><FaChartLine/>Order</ListGroupItem>
+          <ListGroupItem style={{backgroundColor:"#414141",color:"#ffffff"}}><FaDatabase/>Categories</ListGroupItem>
+          <ListGroupItem style={{backgroundColor:"#414141",color:"#ffffff"}}><FaDatabase/>Product</ListGroupItem>
+        </ListGroup>
+        
+      </div>
+      
+      {/* <div className="d-flex flex-row-reverse">
         <ListGroup style={{width:"7%",position:"fixed",height:"100%",marginTop:"4%",backgroundColor:"red"}}>
           <ListGroupItem>A</ListGroupItem>
           <ListGroupItem>B</ListGroupItem>
@@ -86,25 +105,9 @@ const Dashboard = (props) => {
           <ListGroupItem>C</ListGroupItem>
           <ListGroupItem>D</ListGroupItem>
         </ListGroup>
-        
-      </div>
-      
-      <div className="d-flex flex-row-reverse">
-        <ListGroup style={{width:"7%",position:"fixed",height:"100%",marginTop:"4%",backgroundColor:"red"}}>
-          <ListGroupItem>A</ListGroupItem>
-          <ListGroupItem>B</ListGroupItem>
-          <ListGroupItem>B</ListGroupItem>
-          <ListGroupItem>C</ListGroupItem>
-          <ListGroupItem>D</ListGroupItem>
-        </ListGroup>
-      </div>
-      
-      <Productlist /> 
-        
-        
-      
+      </div> */}
+      <Productlist handleChange={handleChange}/> 
       <div>
-
       </div>
   </div>
   );
