@@ -1,5 +1,6 @@
 const initialState = {
     registerResponse: [],
+    loginResponse: [],
     isLoading: false,
     isRejected: false,
     isFulfilled: false,
@@ -26,6 +27,27 @@ const initialState = {
           isFulfilled: true,
           registerResponse: action.payload,
         };
+      //-------------------------------------------------------------
+      case 'POST_LOGIN_PENDING':
+        return {
+          ...state,
+          isLoading: true,
+          isRejected: false,
+          isFulfilled: false,
+        };
+      case 'POST_LOGIN_REJECTED':
+        return {
+          ...state,
+          isLoading: false,
+          isRejected: true,
+        };
+      case 'POST_LOGIN_FULFILLED':
+        return {
+          ...state,
+          isLoading: false,
+          isFulfilled: true,
+          loginResponse: action.payload,
+        };  
      
       default:
         return state;

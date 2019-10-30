@@ -7,3 +7,10 @@ export const postRegister = (input) => {
   };
 };
 
+export const postLogin = (input) => {
+  return {
+    type: 'POST_LOGIN',
+    payload: axios.post ('https://pointofsaleshasan.herokuapp.com/auth/signin',input),
+  };
+};
+

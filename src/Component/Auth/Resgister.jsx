@@ -24,7 +24,6 @@ const Register = (props) => {
         .catch(err => {
           console.log(err);
         });
-        
     };
 
     const handleChange = nameName => event => {
