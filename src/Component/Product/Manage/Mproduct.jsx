@@ -4,68 +4,112 @@ import { Table,Button, Modal, ModalHeader, ModalBody, ModalFooter,
 import {connect} from 'react-redux';
 import { FaEdit,FaTrashAlt,FaPlus } from "react-icons/fa";
 import {getCategories} from '../../Public/Redux/Actions/categories';
-import {postProduct} from '../../Public/Redux/Actions/product';
+import {postProduct,patchProduct,deleteProduct} from '../../Public/Redux/Actions/product';
 
 const Mproduct = (props) => {
-
-  const initialFormState = { name: "",
-                             description: "", 
-                             image: "",
-                             id_categories: "",
-                             price:"" ,
-                             quantity:""};
+  
+  const initialFormState = { id_product:"",name: "", description: "",image: "",id_categories: "",price:"" ,quantity:""};
   
   const [input, setInput] = useState(initialFormState);
-
+  
   const {
     buttonLabel,
     className
   } = props;
+  
+  const [modaledit, setModaledit] = useState(false);
+  const [modaladd, setModaladd] = useState(false);
+  const [modaldelete, setModaldelete] = useState(false);
 
+  //Button Input Clicked!
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await props.dispatch(postProduct(input))
-    .then(result => {
-      console.log("Data Rseult",result)
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    try {
+      const result = await props.dispatch(postProduct(input))
+      setModaladd(!modaladd)
+    } catch (err) {
+
+    }
   };
 
+  //Button EDIT Clicked!
+  const handleSubmitedit = async (event) => {
+    event.preventDefault();
+    try {
+      const result = await props.dispatch(patchProduct(input))
+      setModaledit(!modaledit)
+    } catch (err) {
+
+    }
+  };
+
+  //Button DELETE Clicked!
+  const handleSubmitdelete = async (event) => {
+    event.preventDefault();
+    try {
+      const result = await props.dispatch(deleteProduct(input))
+      setModaldelete(!modaldelete)
+    } catch (err) {
+
+    }
+  };
+
+  //Fetch data
   const fetchddatacategories=async()=>{
-    await props.dispatch(getCategories (input))
-    .then(result => {
-      // console.log("Input",input)
-      // console.log("Hasil",result)
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    try {
+      const result = await props.dispatch(getCategories(input))
+    } catch (err) {
+
+    }
   }
 
+  //
   useEffect(()=>{
     fetchddatacategories()
   },[])
 
+
+  //Show Modal Add
+  const showModalAdd = () => {
+    setInput(initialFormState)
+    setModaladd(!modaladd);
+  }
+
+  //Show Modal Edit
+  const showModalEdit = () => {
+    setInput(initialFormState)
+    setModaledit(!modaledit);
+  }
+
+  //Show Modal Delete
+  const showModalDelete = () => {
+    setInput(initialFormState)
+    setModaldelete(!modaldelete);
+  }
+
+  //Get Data Edit
+  const updateProduct =(row)=>{
+    setInput(row)
+    setModaledit(!modaledit);
+  }
+
+  //Get data Delete
+  const delProduct =(row)=>{
+    setInput(row)
+    setModaldelete(!modaldelete);
+  }
+
   
-
-  const [modal, setModal] = useState(false);
-
-  const toggle = () => setModal(!modal);
-
   const handleChange = nameName => event => {
     setInput({ ...input, [nameName]: event.target.value });
   };
 
-  
-console.log(input)
   return (
     <div className="container" style={{marginTop:"7%"}}>
-    <Button color="success" onClick={toggle} className="ml-5 "><FaPlus/></Button>
+    <Button color="success" onClick={showModalAdd} className="ml-5 "><FaPlus/></Button>
     {/* ----------------------------------------[MODAL ADD]----------------------------------- */}
-    <Modal isOpen={modal} toggle={toggle} className={className}>
-        <ModalHeader toggle={toggle}>ADD PRODUCT</ModalHeader>
+    <Modal isOpen={modaladd} toggle={showModalAdd} className={className}>
+        <ModalHeader toggle={showModalAdd}>ADD PRODUCT</ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup>
@@ -120,15 +164,97 @@ console.log(input)
         </ModalBody>
         <ModalFooter>
           <Button color="warning" onClick={handleSubmit}>Insert</Button>{' '}
-          <Button color="secondary" onClick={toggle}>Cancel</Button>
+          <Button color="secondary" onClick={showModalAdd}>Cancel</Button>
         </ModalFooter>
       </Modal>
-      {/* --------------------------------------------------------------------------- */}
+      {/* ----------------------------------END MODAL ADD----------------------------------------- */}
+
+      {/* ----------------------------------------[MODAL EDIT]----------------------------------- */}
+      <Modal isOpen={modaledit} toggle={showModalEdit} className={className}>
+          <ModalHeader toggle={showModalEdit}>EDIT PRODUCT</ModalHeader>
+          <ModalBody>
+            <Form>
+              <FormGroup>
+                <Label >Name</Label>
+                <Input type="text" name="name"  placeholder="Insert Name Product"
+                onChange={handleChange("name")}
+                value={input.name} />
+              </FormGroup>
+              <FormGroup>
+                <Label >Description</Label>
+                <Input type="text" name="description" placeholder="Insert Description Product"
+                onChange={handleChange("description")}
+                value={input.description} />
+              </FormGroup>
+              <FormGroup>
+                <Label >Url Image</Label>
+                <Input type="text" name="image" placeholder="Insert Url Image Product" 
+                onChange={handleChange("image")}
+                value={input.image}/>
+              </FormGroup>
+              <FormGroup>
+                {/* ----------------------------------------------- */}
+                <div className="form-group">
+                  <label >Categories</label>
+                  <select className="form-control" onChange={handleChange("id_categories")} value={input.id_categories} id="exampleFormControlSelect1">
+                    {props.categories.map(item=>{
+                      return(
+                        <option value={item.id_categories}>{item.Categories}</option>
+                      )
+                    })}
+                  </select>
+                </div>
+                {/* ----------------------------------------------- */}
+              </FormGroup>
+              <FormGroup>
+                <Label >Price</Label>
+                <Input type="text" name="price" placeholder="Insert Price Product"
+                onChange={handleChange("price")}
+                value={input.price} />
+              </FormGroup>
+              <FormGroup>
+                <Label >Quantity</Label>
+                <Input
+                  type="number"
+                  name="number"
+                  placeholder="Insert Quantity Product"
+                  onChange={handleChange("quantity")}
+                  value={input.quantity}
+                />
+              </FormGroup>
+            </Form>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="warning" onClick={handleSubmitedit}>Insert</Button>{' '}
+            <Button color="secondary" onClick={showModalEdit}>Cancel</Button>
+          </ModalFooter>
+        </Modal>
+      {/* ----------------------------------END MODAL EDIT----------------------------------------- */}
+    {/* -------------------------------------------MODAL DELETE------------------------------------ */}
+    <Modal isOpen={modaldelete} toggle={showModalDelete} className={className}>
+          <ModalHeader toggle={showModalDelete}>DELETE PRODUCT</ModalHeader>
+          <ModalBody>
+            <Form>
+              <FormGroup>
+                <Label >Name</Label>
+                <Input type="text" name="name"  placeholder="Insert Name Product"
+                onChange={handleChange("name")}
+                value={input.id_product} />
+              </FormGroup>
+            </Form>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="warning" onClick={handleSubmitdelete}>Insert</Button>{' '}
+            <Button color="secondary" onClick={showModalDelete}>Cancel</Button>
+          </ModalFooter>
+        </Modal>
+        {/* --------------------------------END MODAl DELETE------------------------ */}
     <Table  className="ml-5 mt-3">
       <thead>
         <tr className="d-flex">
           <th className="col-2 text-center">Name</th>
-          <th className="col-3 text-center">Description</th>
+          <th className="col-2 text-center">Description</th>
+          <th className="col-2 text-center">Categories</th>
           <th className="col-2 text-center">Image</th>
           <th className="col-2 ">Price</th>
           <th className="col-2">Qty</th>
@@ -140,11 +266,13 @@ console.log(input)
             return(
                 <tr className="d-flex">
                     <td className="col-2">{item.name}</td>
-                    <td className="text-break col-3">{item.description}</td>
+                    <td className="text-break col-2">{item.description}</td>
+                    <td className="col-1" style={{display:"none"}}>{item.id_categories}</td>
+                    <td className="col-2" type="hidden">{item.Categories}</td>
                     <td className="col-2 text-center"><img style={{width:"70px"}} src={item.image} /></td>
                     <td className="col-2">{item.price}</td>
                     <td className="col-2">{item.quantity}</td>
-                    <td className="col-1"><Button color="warning" ><FaEdit/></Button><Button className="mt-2"color="danger"><FaTrashAlt /></Button></td>
+                    <td className="col-1"><Button value={item.id_product} onClick={()=>updateProduct(item)} color="warning" ><FaEdit/></Button><Button value={item.id_product} onClick={()=>delProduct(item)}  className="mt-2"color="danger"><FaTrashAlt /></Button></td>
                 </tr>
             )
         })}

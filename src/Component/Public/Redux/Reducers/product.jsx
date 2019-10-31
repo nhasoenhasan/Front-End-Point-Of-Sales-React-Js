@@ -1,6 +1,5 @@
 const initialState = {
     productList: [],
-    responspostProduct:[],
     isLoading: false,
     isRejected: false,
     isFulfilled: false,
@@ -28,26 +27,45 @@ const initialState = {
           productList: action.payload.data.result,
         };
       //-------------------POST----------------
-      case 'POST_PRODUCT_PENDING':
-          return {
-            ...state,
-            isLoading: true,
-            isRejected: false,
-            isFulfilled: false,
-          };
-        case 'POST_PRODUCT_REJECTED':
-          return {
-            ...state,
-            isLoading: false,
-            isRejected: true,
-          };
-        case 'POST_PRODUCT_FULFILLED':
-          return {
-            ...state,
-            isLoading: false,
-            isFulfilled: true,
-            responspostProduct: action.payload,
-          };
+      case 'POST_PRODUCT_FULFILLED':
+        const productList=state.productList.slice(0)
+        productList.push(action.payload.data.result[0])
+        return {
+          ...state,
+          isLoading: false,
+          isFulfilled: true,
+          productList
+        };
+      case 'PATCH_PRODUCT_FULFILLED':
+        const productListAfterPatch = state.productList.map (product => {
+          if (product.id_product === action.payload.data.result[0].id_product) {
+              return action.payload.data.result[0];
+          }
+          return product;
+        });
+        return {
+          ...state,
+          isLoading: false,
+          isFulfilled: true,
+          productList:productListAfterPatch
+        };
+
+      case 'DELETE_PRODUCT_FULFILLED':
+        
+        // const dataAfterDelete = state.productList.filter (
+        //   product => product.id_product !== action.payload.data.id
+        // );
+        const  dataAfterDelete = state.productList.filter(function(value, index, arr){
+          console.log("Nilai Delete",value)
+          return value.id_product== action.payload.data.id;
+        });
+        console.log(dataAfterDelete)
+        return {
+          ...state,
+          isLoading: false,
+          isFulfilled: true,
+          productList: dataAfterDelete,
+        };
      
       default:
         return state;

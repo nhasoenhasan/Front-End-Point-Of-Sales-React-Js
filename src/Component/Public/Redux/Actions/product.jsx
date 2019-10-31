@@ -15,3 +15,21 @@ export const postProduct = (input) => {
     payload: axios.post ('https://pointofsaleshasan.herokuapp.com/product',input),
   };
 };
+
+export const patchProduct = (input) => {
+  const id=input.id_product;
+  return {
+    type: 'PATCH_PRODUCT',
+    payload: axios.patch ('https://pointofsaleshasan.herokuapp.com/product/'+id,input
+    )
+  };
+};
+
+export const deleteProduct = (input) => {
+  const id=input.id_product;
+  return {
+    type: 'DELETE_PRODUCT',
+    payload: axios.delete ('https://pointofsaleshasan.herokuapp.com/product/'+id
+    )
+  };
+};
