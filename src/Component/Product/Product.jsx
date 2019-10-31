@@ -38,13 +38,12 @@ const Productlist= (props) => {
               props.products.map(item=>{
                 return(
                 <Col md="3" className="mb-5" >
-                    <Card  className="mt-3">
-                        <CardImg top width="100%" src={item.image} alt="Card image cap" />
-                        <CardBody>
-                        <CardTitle  key={item.id} >{item.name}</CardTitle>
-                        <CardText>{item.description}</CardText>
-                        </CardBody>
-                    </Card>
+                    <div className="card" style={{width: "14rem",height:"20px"}}>
+                      <img className="card-img-top" style={{width:"14rem",height:"20px"}} src={item.image} alt="Card image cap"/>
+                      <div className="card-body">
+                        <p className="card-text" style={{width: "14rem",height:"20px"}}>{item.description}</p>
+                      </div>
+                    </div>
               </Col>
                 )
               })
