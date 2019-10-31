@@ -56,10 +56,15 @@ const initialState = {
         //   product => product.id_product !== action.payload.data.id
         // );
         const  dataAfterDelete = state.productList.filter(function(value, index, arr){
-          console.log("Nilai Delete",value)
-          return value.id_product== action.payload.data.id;
+          console.log("id Sebelum =",value.id_product)
+          return value.id_product == action.payload.data.id;
         });
-        console.log(dataAfterDelete)
+
+        
+        console.log("Sebelum =",state.productList)
+        console.log("Sesudah =",dataAfterDelete)
+        console.log("id Sesudah=",action.payload.data.id)
+
         return {
           ...state,
           isLoading: false,
