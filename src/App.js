@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter,Route} from 'react-router-dom';
+import {BrowserRouter,Route,Switch} from 'react-router-dom';
 import Login from './Component/Auth/Login';
 import Register from './Component/Auth/Resgister';
 import Dashboard from './Component/Dashboard/Dashboard';

@@ -14,7 +14,7 @@ const Productlist= (props) => {
     const [input, setInput] = useState(initialFormState);
 
   return (
-    <div className="container "  >
+    <div className="container ">
       <div style={{marginLeft:"6%"}}>
         <div className="form-group row " style={{marginTop:"7%"}}>
           <Input className="col-sm-2 ml-3" type="select" onChange={props.handleChange("sort")} value={input.sort}>

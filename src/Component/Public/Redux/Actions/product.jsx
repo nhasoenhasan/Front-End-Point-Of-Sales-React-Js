@@ -8,3 +8,10 @@ export const getProduct = (data) => {
     }),
   };
 };
+
+export const postProduct = (input) => {
+  return {
+    type: 'POST_PRODUCT',
+    payload: axios.post ('https://pointofsaleshasan.herokuapp.com/product',input),
+  };
+};
