@@ -52,18 +52,9 @@ const initialState = {
 
       case 'DELETE_PRODUCT_FULFILLED':
         
-        // const dataAfterDelete = state.productList.filter (
-        //   product => product.id_product !== action.payload.data.id
-        // );
         const  dataAfterDelete = state.productList.filter(function(value, index, arr){
-          console.log("id Sebelum =",value.id_product)
-          return value.id_product == action.payload.data.id;
+          return value.id_product != action.payload.data.id;
         });
-
-        
-        console.log("Sebelum =",state.productList)
-        console.log("Sesudah =",dataAfterDelete)
-        console.log("id Sesudah=",action.payload.data.id)
 
         return {
           ...state,

@@ -236,8 +236,7 @@ const Mproduct = (props) => {
           <ModalBody>
             <Form>
               <FormGroup>
-                <Label >Name</Label>
-                <Input type="text" name="name"  placeholder="Insert Name Product"
+                <Input type="hidden" name="name"  placeholder="Insert Name Product"
                 onChange={handleChange("name")}
                 value={input.id_product} />
               </FormGroup>

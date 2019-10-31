@@ -15,6 +15,7 @@ import { MdRestaurant } from "react-icons/md";
 import { FaChartLine,FaDatabase } from "react-icons/fa";
 import { Route,Link } from 'react-router-dom';
 import Mproduct from '../Product/Manage/Mproduct'
+import Mcategories from '../Categories/Mcategories';
 
 const Dashboard = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -91,10 +92,10 @@ const Dashboard = (props) => {
       </Navbar>
       <div className="d-flex flex-row" >
         <ListGroup style={{width:"10%",position:"fixed",height:"100%",marginTop:"4%",backgroundColor:"#414141"}}>
-          <Link to="/dashboard/product"><ListGroupItem style={{backgroundColor:"#414141",color:"#ffffff"}}><MdRestaurant/>Food</ListGroupItem></Link>
-          <Link to="/dashboard/mproduct"><ListGroupItem style={{backgroundColor:"#414141",color:"#ffffff"}}><FaChartLine/>Order</ListGroupItem></Link>
-          <ListGroupItem style={{backgroundColor:"#414141",color:"#ffffff"}}><FaDatabase/>Categories</ListGroupItem>
-          <ListGroupItem style={{backgroundColor:"#414141",color:"#ffffff"}}><FaDatabase/>Product</ListGroupItem>
+          <Link to="/dashboard/product"><ListGroupItem style={{backgroundColor:"#414141",color:"#ffffff"}}><MdRestaurant/>Food</ListGroupItem>
+          <ListGroupItem style={{backgroundColor:"#414141",color:"#ffffff"}}><FaChartLine/>Order</ListGroupItem></Link>
+          <Link to="/dashboard/mcategories"><ListGroupItem style={{backgroundColor:"#414141",color:"#ffffff"}}><FaDatabase/>Categories</ListGroupItem></Link>
+          <Link to="/dashboard/mproduct"><ListGroupItem style={{backgroundColor:"#414141",color:"#ffffff"}}><FaDatabase/>Product</ListGroupItem></Link>
         </ListGroup>
         
       </div>
@@ -111,6 +112,7 @@ const Dashboard = (props) => {
        
       <Route  path='/dashboard/product' > <Productlist handleChange={handleChange}/></Route>
       <Route  path='/dashboard/mproduct' > <Mproduct/></Route>
+      <Route  path='/dashboard/mcategories' > <Mcategories/></Route>
       <div>
       </div>
   </div>

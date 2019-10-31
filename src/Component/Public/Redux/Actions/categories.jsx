@@ -15,3 +15,22 @@ export const postCategories = (input) => {
     payload: axios.post ('https://pointofsaleshasan.herokuapp.com/product/categories',input),
   };
 };
+
+export const patchCategories = (input) => {
+  const id=input.id_categories;
+  return {
+    type: 'PATCH_CATEGORIES',
+    payload: axios.patch ('https://pointofsaleshasan.herokuapp.com/product/categories/'+id,input
+    )
+  };
+};
+
+export const deleteCategories = (input) => {
+  const id=input.id_categories;
+  return {
+    type: 'DELETE_CATEGORIES',
+    payload: axios.delete ('https://pointofsaleshasan.herokuapp.com/product/categories/'+id
+    )
+  };
+};
+
