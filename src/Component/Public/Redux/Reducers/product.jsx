@@ -4,6 +4,7 @@ const initialState = {
     isRejected: false,
     isFulfilled: false,
   };
+
   const product = (state = initialState, action) => {
     switch (action.type) {
       case 'GET_PRODUCT_PENDING':

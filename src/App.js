@@ -6,6 +6,7 @@ import Dashboard from './Component/Dashboard/Dashboard';
 
 
 const App = () => {
+  const token = localStorage.getItem("x-access-token");
   return (
     <BrowserRouter>
       <Route exact path="/" component={Login} />

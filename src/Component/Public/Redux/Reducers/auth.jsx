@@ -1,10 +1,16 @@
 const initialState = {
     registerResponse: [],
+    registerMessage:'',
+    registerStatus:'',
+    //Login
     loginResponse: [],
+    loginMessage:'',
+    loginStatus:'',
     isLoading: false,
     isRejected: false,
     isFulfilled: false,
   };
+  
   const auth = (state = initialState, action) => {
     switch (action.type) {
       case 'POST_REGISTER_PENDING':
@@ -25,7 +31,8 @@ const initialState = {
           ...state,
           isLoading: false,
           isFulfilled: true,
-          registerResponse: action.payload,
+          registerMessage:action.payload.data.message,
+          registerStatus:action.payload.data.status,
         };
       //-------------------------------------------------------------
       case 'POST_LOGIN_PENDING':
@@ -42,11 +49,14 @@ const initialState = {
           isRejected: true,
         };
       case 'POST_LOGIN_FULFILLED':
+          const token =action.payload.data.token;
+          localStorage.setItem("x-access-token", token);
         return {
           ...state,
           isLoading: false,
           isFulfilled: true,
-          loginResponse: action.payload,
+          loginMessage: action.payload.data.message,
+          loginStatus:action.payload.data.status
         };  
      
       default:

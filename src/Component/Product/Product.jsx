@@ -16,16 +16,29 @@ const Productlist= (props) => {
   return (
     <div className="container ">
       <div style={{marginLeft:"6%"}}>
-        <div className="form-group row " style={{marginTop:"7%"}}>
-          <Input className="col-sm-2 ml-3" type="select" onChange={props.handleChange("sort")} value={input.sort}>
+        <div className="form-group row " style={{marginTop:"9%"}}>
+          {/* <Input className="col-sm-2 ml-3" type="select" onChange={props.handleChange("sort")} value={input.sort}>
             <option >Sort By ...</option>
             <option value={'name'}>Name</option>
             <option value={'Categories'}>Categories</option>
             <option value={'date_added'}>Date Aded</option>
             <option value={'date_updated'}>Date Updated</option>
-          </Input>
-          <Button color="primary " className="ml-2 mr-2" onClick={props.handleChange("order")}  value={'ASC'}><FaSortAmountDown/></Button>
-          <Button color="primary " className="" onClick={props.handleChange("order")} value={'DESC'}><FaSortAmountUp/></Button>
+          </Input> */}
+          {/* -------------- */}
+          <select className="form-control col-sm-2 ml-3" onChange={props.handleChange("sort")} value={input.sort} id="exampleFormControlSelect1">
+            <option >Sort By ...</option>
+            <option value={'name'}>Name</option>
+            <option value={'Categories'}>Categories</option>
+            <option value={'date_added'}>Date Aded</option>
+            <option value={'date_updated'}>Date Updated</option>
+          </select>
+          <select className="form-control col-sm-2 ml-3" onChange={props.handleChange("order")} value={input.order} id="exampleFormControlSelect1">
+            <option >Order By ...</option>
+            <option value={'ASC'}>ASC</option>
+            <option value={'DESC'}>DESC</option>
+          </select>
+          {/* <Button color="primary " className="ml-2 mr-2" onClick={props.handleChange("order")}  value={'ASC'}><FaSortAmountDown/></Button>
+          <Button color="primary " className="" onClick={props.handleChange("order")} value={'DESC'}><FaSortAmountUp/></Button> */}
         </div>
         <Row >
               { props.products.length==''?
@@ -38,10 +51,12 @@ const Productlist= (props) => {
               props.products.map(item=>{
                 return(
                 <Col md="3" className="mb-5" >
-                    <div className="card" style={{width: "14rem",height:"20px"}}>
-                      <img className="card-img-top" style={{width:"14rem",height:"20px"}} src={item.image} alt="Card image cap"/>
-                      <div className="card-body">
-                        <p className="card-text" style={{width: "14rem",height:"20px"}}>{item.description}</p>
+                    <div className="card" style={{maxHeight: "60%",minHeight: "60%"}}>
+                      <img className="card-img-top" style={{maxHeight: "15rem",minHeight: "15rem"}} src={item.image} alt="Card image cap"/>
+                      <div className="card-body text-white" style={{border:" 1px solid black",backgroundColor:"black"}}>
+                        <p className="card-text font-weight-bold">{item.name}</p>
+                        <p className="card-text font-weight-bold">Rp.{item.price}</p>
+                        <p className="card-text text-truncate" >{item.description}</p>
                       </div>
                     </div>
               </Col>

@@ -2,29 +2,25 @@ import React, { useState, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input,Alert} from 'reactstrap';
 import {connect} from 'react-redux';
 import {postRegister} from '../Public/Redux/Actions/auth';
+import { Link} from "react-router-dom";
 
 const Register = (props) => {
     const initialFormState = { username: "", password: "", email: "" };
     const [input, setInput] = useState(initialFormState);
-    const [response, setResponse] = useState({status: "", message:"",email:"",username:""});
     const [visible, setVisible] = useState(true);
    
     const onDismiss = () => setVisible(false);
     
     const handleSubmit = async (event) => {
         event.preventDefault();
-        await props.dispatch(postRegister (input))
-        .then(result => {
-          setResponse(
-            {status: result.value.data.status,
-             message:result.value.data.message
-            }
-          );
-        })
-        .catch(err => {
-          console.log(err);
-        });
+        try {
+          const result=await props.dispatch(postRegister (input))
+        } catch (error) {
+          console.log(error);
+        }
     };
+
+    console.log(props.response)
 
     const handleChange = nameName => event => {
         setInput({ ...input, [nameName]: event.target.value });
@@ -35,7 +31,7 @@ const Register = (props) => {
         <div className="container">
          
           {/* Alert Success Register */}
-          {response.status ===200?(
+          {/* {response.status ===200?(
             <Alert color="success" toggle={onDismiss} isOpen={visible} fade={false}>
             {response.message}<br/>
             Username:{response.username}<br/>
@@ -43,44 +39,50 @@ const Register = (props) => {
             </Alert>):
             (
               ""
-            )}
+            )} */}
             {/* Alert Failed Register */}
-          {response.status ===400?(
+          {/* {response.status ===400?(
             <Alert color="danger" toggle={onDismiss} isOpen={visible} fade={false}>
             {response.message}<br/>
             </Alert>):
             (
               ""
-            )}
-            <h4>Register</h4>
+            )} */}
+            <div className="pr-5 p-5 m-5 mx-auto text-white  " style={{backgroundColor:"#000000",width:"40%",padding: "10px",boxShadow: "5px 10px 8px 10px #888888"}} >
+            <h2 className="text-center pb-1">Register</h2>
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
                     <Label >Email</Label>
-                    <Input type="email" placeholder="with a placeholder"
+                    <Input type="email" placeholder="Insert E-mail"
                     onChange={handleChange("email")}
                     value={input.email} />
                 </FormGroup>
                 <FormGroup>
                     <Label >Username</Label>
-                    <Input type="text"  placeholder="with a placeholder"
+                    <Input type="text"  placeholder="Insert Username"
                     onChange={handleChange("username")}
                     value={input.username} />
                 </FormGroup>
                 <FormGroup>
                     <Label >Password</Label>
-                    <Input type="password"  placeholder="password placeholder"
+                    <Input type="password"  placeholder="Insert Password"
                     onChange={handleChange("password")}
                     value={input.password}/>
                 </FormGroup>
-                <Button>Submit</Button>
+                <div className="text-left">
+                <Button className="mb-2 bg-warning" color="warning">Register</Button><br/>
+                <Link  to="/">Signin</Link>
+                </div>
             </Form>
+        </div>
         </div>
     );
 };
 
 const mapStateToProps = state => {
     return {
-      response: state.auth.registerResponse
+      registerMessage: state.auth.registerMessage,
+      registerStatus: state.auth.registerStatus,
     };
   };
 

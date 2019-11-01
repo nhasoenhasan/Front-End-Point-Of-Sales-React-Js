@@ -104,7 +104,7 @@ const Mcategories = (props) => {
   };
 
   return (
-    <div className="container" style={{marginTop:"7%"}}>
+    <div className="container" style={{marginTop:"9%",marginLeft:"13%"}}>
     <Button color="success" onClick={showModalAdd} className="ml-5 "><FaPlus/></Button>
     {/* ----------------------------------------[MODAL ADD]----------------------------------- */}
     <Modal isOpen={modaladd} toggle={showModalAdd} className={className}>
@@ -113,7 +113,7 @@ const Mcategories = (props) => {
           <Form>
             <FormGroup>
               <Label >Name</Label>
-              <Input type="text" name="Categories"  placeholder="Insert Categories Categories"
+              <Input type="text" name="Categories"  placeholder="Insert Name Categories "
               onChange={handleChange("Categories")}
               value={input.Categories} />
             </FormGroup>
@@ -133,7 +133,7 @@ const Mcategories = (props) => {
             <Form>
               <FormGroup>
                 <Label >Name</Label>
-                <Input type="text" name="Categories"  placeholder="Insert Categories Categories"
+                <Input type="text" name="Categories"  placeholder="Insert Name Categories"
                 onChange={handleChange("Categories")}
                 value={input.Categories} />
               </FormGroup>
@@ -146,11 +146,13 @@ const Mcategories = (props) => {
         </Modal>
       {/* ----------------------------------END MODAL EDIT----------------------------------------- */}
     {/* -------------------------------------------MODAL DELETE------------------------------------ */}
-    <Modal isOpen={modaldelete} toggle={showModalDelete} className={className}>
-          <ModalHeader toggle={showModalDelete}>DELETE CATEGORIES</ModalHeader>
+    <Modal className="modal-dialog modal-sm " isOpen={modaldelete} toggle={showModalDelete}>
+          <ModalHeader  toggle={showModalDelete}>DELETE CATEGORIES</ModalHeader>
           <ModalBody>
             <Form>
-              <FormGroup>
+              <FormGroup className="text-center">
+                <img  width="40%" src="https://cdn2.iconfinder.com/data/icons/weby-flat-vol-1/512/1_warning-caution-exclamation-alert-attention-error-02-512.png"></img>
+                <p className="font-weight-bold">are you sure to delete this item? </p>
                 <Input type="hidden" name="name"  placeholder="Insert Name Categories"
                 onChange={handleChange("name")}
                 value={input.id_categories} />
@@ -163,23 +165,24 @@ const Mcategories = (props) => {
           </ModalFooter>
         </Modal>
         {/* --------------------------------END MODAl DELETE------------------------ */}
-    <Table  className="ml-5 mt-3">
-      <thead>
-        <tr className="d-flex">
-          <th className="col-2 text-center">Categories</th>
-        </tr>
-      </thead>
-      <tbody>
-        {props.categories.map(item=>{
-            return(
-                <tr className="d-flex">
-                    <td className="col-2">{item.Categories}</td>
-                    <td className="col-1"><Button value={item.id_categories} onClick={()=>updateCategories(item)} color="warning" ><FaEdit/></Button><Button value={item.id_categories} onClick={()=>delCategories(item)}  className="mt-2"color="danger"><FaTrashAlt /></Button></td>
-                </tr>
-            )
-        })}
-      </tbody>
-    </Table>
+      <Table  className="ml-5 mt-3" >
+        <thead>
+          <tr className="d-flex">
+            <th className="col-4 text-center">Categories</th>
+            <th className="col-3 text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.categories.map(item=>{
+              return(
+                  <tr className="d-flex">
+                      <td className="col-4">{item.Categories}</td>
+                      <td className="col-3 text-center"><Button value={item.id_categories} onClick={()=>updateCategories(item)} color="warning" ><FaEdit/></Button><Button value={item.id_categories} onClick={()=>delCategories(item)}  className="ml-3"color="danger"><FaTrashAlt /></Button></td>
+                  </tr>
+              )
+          })}
+        </tbody>
+      </Table>
     </div>
   );
 }

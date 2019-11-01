@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import { FaEdit,FaTrashAlt,FaPlus } from "react-icons/fa";
 import {getCategories} from '../../Public/Redux/Actions/categories';
 import {postProduct,patchProduct,deleteProduct} from '../../Public/Redux/Actions/product';
+import { IoIosWarning } from "react-icons/io";
+
 
 const Mproduct = (props) => {
   
@@ -104,12 +106,13 @@ const Mproduct = (props) => {
     setInput({ ...input, [nameName]: event.target.value });
   };
 
+  console.log(input)
   return (
     <div className="container" style={{marginTop:"7%"}}>
     <Button color="success" onClick={showModalAdd} className="ml-5 "><FaPlus/></Button>
     {/* ----------------------------------------[MODAL ADD]----------------------------------- */}
     <Modal isOpen={modaladd} toggle={showModalAdd} className={className}>
-        <ModalHeader toggle={showModalAdd}>ADD PRODUCT</ModalHeader>
+        <ModalHeader   toggle={showModalAdd}>ADD PRODUCT</ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup>
@@ -162,7 +165,7 @@ const Mproduct = (props) => {
             </FormGroup>
           </Form>
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter >
           <Button color="warning" onClick={handleSubmit}>Insert</Button>{' '}
           <Button color="secondary" onClick={showModalAdd}>Cancel</Button>
         </ModalFooter>
@@ -231,24 +234,25 @@ const Mproduct = (props) => {
         </Modal>
       {/* ----------------------------------END MODAL EDIT----------------------------------------- */}
     {/* -------------------------------------------MODAL DELETE------------------------------------ */}
-    <Modal isOpen={modaldelete} toggle={showModalDelete} className={className}>
-          <ModalHeader toggle={showModalDelete}>DELETE PRODUCT</ModalHeader>
-          <ModalBody>
+    <Modal isOpen={modaldelete} toggle={showModalDelete}  className="modal-dialog modal-sm ">
+          <ModalBody  >
             <Form>
-              <FormGroup>
+              <FormGroup className="text-center">
+                <img  width="40%" src="https://cdn2.iconfinder.com/data/icons/weby-flat-vol-1/512/1_warning-caution-exclamation-alert-attention-error-02-512.png"></img>
+                <p className="font-weight-bold">are you sure to delete this item? </p>
                 <Input type="hidden" name="name"  placeholder="Insert Name Product"
                 onChange={handleChange("name")}
                 value={input.id_product} />
               </FormGroup>
             </Form>
           </ModalBody>
-          <ModalFooter>
-            <Button color="warning" onClick={handleSubmitdelete}>Insert</Button>{' '}
+          <ModalFooter >
+            <Button color="warning" onClick={handleSubmitdelete}>Okey</Button>{' '}
             <Button color="secondary" onClick={showModalDelete}>Cancel</Button>
           </ModalFooter>
         </Modal>
         {/* --------------------------------END MODAl DELETE------------------------ */}
-    <Table  className="ml-5 mt-3">
+    <Table  className="ml-5 pl-4 mt-3">
       <thead>
         <tr className="d-flex">
           <th className="col-2 text-center">Name</th>
@@ -267,7 +271,7 @@ const Mproduct = (props) => {
                     <td className="col-2">{item.name}</td>
                     <td className="text-break col-2">{item.description}</td>
                     <td className="col-1" style={{display:"none"}}>{item.id_categories}</td>
-                    <td className="col-2" type="hidden">{item.Categories}</td>
+                    <td className="col-2 text-center" type="hidden">{item.Categories}</td>
                     <td className="col-2 text-center"><img style={{width:"70px"}} src={item.image} /></td>
                     <td className="col-2">{item.price}</td>
                     <td className="col-2">{item.quantity}</td>
