@@ -2,17 +2,20 @@ import React, { useState,useEffect} from 'react';
 import {
   Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button,
-  Row, Col,Spinner,Form, FormGroup, Label, Input,
+  Row, Col,Spinner,Form, FormGroup, Label, Input
 } from 'reactstrap';
 import {connect} from 'react-redux';
-import { FaSortAmountDown,FaSortAmountUp } from 'react-icons/fa';
-
+import { FaPlus,FaSortAmountDown,FaSortAmountUp } from 'react-icons/fa';
+import { addToCart } from '../Public/Redux/Actions/cartActions'
 
 const Productlist= (props) => {
     const initialFormState = { sort: "",
                                order:"" };
     const [input, setInput] = useState(initialFormState);
 
+    const handleClick = (id)=>{
+        props.addToCart(id); 
+    }
   return (
     <div className="container ">
       <div style={{marginLeft:"6%"}}>
@@ -56,7 +59,8 @@ const Productlist= (props) => {
                       <div className="card-body text-white" style={{border:" 1px solid black",backgroundColor:"black"}}>
                         <p className="card-text font-weight-bold">{item.name}</p>
                         <p className="card-text font-weight-bold">Rp.{item.price}</p>
-                        <p className="card-text text-truncate" >{item.description}</p>
+                        <p className="card-text text-truncate" >{item.description}</p> 
+                        <Button color="warning"  className="" onClick={()=>{handleClick(item.id_product)}}><FaPlus/></Button>
                       </div>
                     </div>
               </Col>
@@ -75,4 +79,11 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect (mapStateToProps) (Productlist);
+const mapDispatchToProps= (dispatch)=>{
+    
+  return{
+      addToCart: (id)=>{dispatch(addToCart(id))}
+  }
+}
+
+export default connect (mapStateToProps,mapDispatchToProps) (Productlist);

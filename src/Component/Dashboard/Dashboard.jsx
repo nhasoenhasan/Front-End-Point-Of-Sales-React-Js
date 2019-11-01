@@ -12,10 +12,11 @@ import Productlist from '../Product/Product';
 import {getProduct} from '../Public/Redux/Actions/product';
 import {connect} from 'react-redux';
 import { MdRestaurant } from "react-icons/md";
-import { FaChartLine,FaDatabase } from "react-icons/fa";
+import { FaChartLine,FaDatabase,FaShoppingBag } from "react-icons/fa";
 import { withRouter,Route,Link } from 'react-router-dom';
 import Mproduct from '../Product/Manage/Mproduct'
 import Mcategories from '../Categories/Mcategories';
+import Cart from '../Order/Cart';
 import Logo from "../img/Lawless_burgerbar_header.gif";
 
 
@@ -70,7 +71,7 @@ const Dashboard = (props) => {
           </Form>
           </Nav>
         </Collapse>
-        <img className="ml-3 mr-3" width="4%"src="https://image.flaticon.com/icons/png/512/368/368060.png"/>
+        <Link to="/dashboard/cart" className="text-white mr-3 ml-3"><FaShoppingBag/></Link>
       </Navbar>
       <div className="d-flex flex-row" >
         <ListGroup className="font-weight-bold text-white" style={{width:"11%",position:"fixed",height:"100%",marginTop:"5%",backgroundColor:"#f5ad3f"}}>
@@ -83,6 +84,7 @@ const Dashboard = (props) => {
       <Route  path='/dashboard/product' > <Productlist handleChange={handleChange}/></Route>
       <Route  path='/dashboard/mproduct' > <Mproduct/></Route>
       <Route  path='/dashboard/mcategories' > <Mcategories/></Route>
+      <Route  path='/dashboard/cart' > <Cart/></Route>
       <div>
       </div>
   </div>
