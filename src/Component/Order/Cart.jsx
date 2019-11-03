@@ -1,25 +1,54 @@
-import React, { Component } from 'react';
+import React, { useState,useEffect} from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { removeItem,addQuantity,subtractQuantity} from '../Public/Redux/Actions/cartActions'
+import { removeItem,addQuantity,subtractQuantity,addToCart} from '../Public/Redux/Actions/cartActions'
+import {postOrder} from '../Public/Redux/Actions/product' 
 import {Button,Row,Col} from 'reactstrap';
 import { FaPlus,FaSortAmountDown,FaSortAmountUp } from 'react-icons/fa';
 
 const Cart= (props) => {
+    const [input, setInput]=useState({
+        id_product:"",
+        total:"",
+        qty:"",
+    });
+    
+    const [Total, setTotal]=useState({
+        sub_total:""
+    });
+
+    useEffect(()=>{
+        setInput({ ...props.items})
+    },[props.items])
+    
+    useEffect(()=>{
+        setTotal({ sub_total:props.Total})
+    },[props.Total])
+    
     const handleRemove = (id)=>{
         props.removeItem(id);
     }
     //to add the quantity
-    const handleAddQuantity = (id)=>{
+    const handleAddQuantity =(id)=>{
+        // setInput({ ...props.items})
         props.addQuantity(id);
     }
     //to substruct from the quantity
     const handleSubtractQuantity = (id)=>{
         props.subtractQuantity(id);
     }
-
+    //to substruct from the quantity
+    const handlecheckout = async(event)=>{
+        event.preventDefault();
+        try {
+            await props.dispatch(postOrder(input))
+        } catch (error) {
+            
+        }
+    }
+    
     let addedItems = props.items.length ?
-            (  
+    (  
                 
                 props.items.map(item=>{
                     return(
@@ -37,25 +66,6 @@ const Cart= (props) => {
                         </div>
                         </div>
                         </Col>
-
-                        // <li className="collection-item avatar" key={item.id_product}>
-                        //     <div className="item-img"> 
-                        //         <img width="30%" src={item.image} alt={item.img} className=""/>
-                        //     </div>
-                        //      <div className="item-desc">
-                        //         <span className="title">{item.title}</span>
-                        //         <p>{item.desc}</p>
-                        //         <p><b>Price: {item.price}Rp</b></p> 
-                        //         <p>
-                        //         <b>Quantity: {item.quantity}</b> 
-                        //         </p>
-                        //         <div className="add-remove">
-                        //             <Link to="/cart"><i className="material-icons" onClick={()=>{this.handleAddQuantity(item.id_product)}}>arrow_drop_up</i></Link>
-                        //             <Link to="/cart"><i className="material-icons" onClick={()=>{this.handleSubtractQuantity(item.id_product)}}>arrow_drop_down</i></Link>
-                        //         </div>
-                        //             <button className="waves-effect waves-light btn pink remove" onClick={()=>{this.handleRemove(item.id_product)}}>Remove</button>
-                        //         </div>         
-                        // </li> 
                     )
                 }
 
@@ -63,18 +73,18 @@ const Cart= (props) => {
             ):
 
              (
-                <h3 className="fonr-weight-bold">Nothing Order Here!!.</h3>
+                <h3 className="font-weight-bold">Nothing Order Here!!.</h3>
              )
 
        return(
             <div className="container" style={{marginLeft:"20%",marginTop:"6%"}}>
                 <div >
                     <h5>You have ordered:</h5>
-                    <ul className="collection">
                         <Row>
                         {addedItems}
                         </Row>
-                    </ul>
+                        <p className="font-weight-bold">Total:{props.Total} </p>
+                        <Button type="submit "color="danger" onClick={handlecheckout}>Checkout</Button>
                 </div>        
             </div>
        )
@@ -83,14 +93,15 @@ const Cart= (props) => {
 const mapStateToProps = (state)=>{
     return{
         items: state.product.addedItems,
-        //addedItems: state.addedItems
+        Total: state.product.total,
     }
 }
 const mapDispatchToProps = (dispatch)=>{
     return{
         removeItem: (id)=>{dispatch(removeItem(id))},
         addQuantity: (id)=>{dispatch(addQuantity(id))},
-        subtractQuantity: (id)=>{dispatch(subtractQuantity(id))}
+        subtractQuantity: (id)=>{dispatch(subtractQuantity(id))},
+        postOrder:(input)=>{dispatch(postOrder(input))}
     }
 }
 

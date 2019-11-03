@@ -1,12 +1,11 @@
-import { ADD_TO_CART,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY,ADD_SHIPPING } from '../Actions/action-types/cart-actions'
-
 const initialState = {
     productList: [],
     isLoading: false,
     isRejected: false,
     isFulfilled: false,
     addedItems:[],
-    total: 0
+    total: 0,
+    orderResponse:[]
   };
 
   const product = (state = initialState, action) => {
@@ -33,7 +32,7 @@ const initialState = {
         };
       //-------------------POST----------------
       case 'POST_PRODUCT_FULFILLED':
-        const productList=state.productList.slice(0)
+        const productList=state.productList
         productList.push(action.payload.data.result[0])
         return {
           ...state,
@@ -70,80 +69,76 @@ const initialState = {
 
       //INSIDE HOME COMPONENT
       case 'ADD_TO_CART':
-            let addedItem = state.productList.find(item=> item.id_product === action.id)
-              //check if the action id exists in the addedItems
-            let existed_item= state.addedItems.find(item=> action.id === item.id_product)
-            if(existed_item)
-            {
-                addedItem.quantity += 1 
-                return{
-                    ...state,
-                    total: state.total + addedItem.price 
-                      }
-            }
-            else{
-                addedItem.quantity = 1;
-                //calculating the total
-                let newTotal = state.total + addedItem.price 
-                
-                return{
-                    ...state,
-                    addedItems: [...state.addedItems, addedItem],
-                    total : newTotal
-                }
-                
-            }
-        case 'REMOVE_ITEM':
-            let itemToRemove= state.addedItems.find(item=> action.id === item.id_product)
-            let new_items = state.addedItems.filter(item=> action.id !== item.id_product)
+        console.log("Id Action",action.id)
+        let addedItem = state.productList.find(item=> item.id_product === action.id)
+            //check if the action id exists in the addedItems
+        let existed_item= state.addedItems.find(item=> action.id === item.id_product)
             
-            //calculating the total
-            let newTotal = state.total - (itemToRemove.price * itemToRemove.quantity )
-            console.log(itemToRemove)
+        if(existed_item)
+        {
+            addedItem.quantity += 1 
             return{
                 ...state,
-                addedItems: new_items,
-                total: newTotal
+                total: state.total + addedItem.price 
+                  }
+        }
+        else{
+            addedItem.quantity = 1;
+                
+            return{
+                 ...state,
+                addedItems: [...state.addedItems, addedItem],
+                total : state.total + addedItem.price
             }
-        // case 'ADD_QUANTITY':
-        //     let addeQuantity = state.productList.find(item=> item.id_product === action.id)
-        //     addeQuantity.quantity += 1 
-        //     let Total = state.total + addedItem.price
-        //     return{
-        //         ...state,
-        //         total: Total
-        //     }
-        // case 'SUB_QUANTITY':
-        //     addedItem = state.productList.find(item=> item.id_product === action.id) 
-        //     //if the qt == 0 then it should be removed
-        //     if(addedItem.quantity === 1){
-        //         let new_items = state.addedItems.filter(item=>item.id_product !== action.id)
-        //         let newTotal = state.total - addedItem.price
-        //         return{
-        //             ...state,
-        //             addedItems: new_items,
-        //             total: newTotal
-        //         }
-        //     }
-        //     else {
-        //         addedItem.quantity -= 1
-        //         newTotal = state.total - addedItem.price
-        //         return{
-        //             ...state,
-        //             total: newTotal
-        //         }
-        //     }
-        // case 'ADD_SHIPPING':
-        //   return{
-        //     ...state,
-        //     total: state.total + 6
-        //   }
-        // case 'SUB_SHIPPING':
-        //     return{
-        //       ...state,
-        //       total: state.total - 6
-        //   }
-      
+                
+        }
+      case 'ADD_QUANTITY':
+        let addeQuantity = state.addedItems.find(item=> item.id_product === action.id)
+        addeQuantity.quantity += 1 
+        let Totaladd = state.total + addeQuantity.price
+        return{
+            ...state,
+            total: Totaladd
+        }
+      case 'SUB_QUANTITY':
+        let subQuantity = state.addedItems.find(item=> item.id_product === action.id)
+        subQuantity.quantity -= 1 
+        let Totalsub = state.total - subQuantity.price
+        return{
+          ...state,
+            total: Totalsub
+        }
+      case 'REMOVE_ITEM':
+        let itemToRemove= state.addedItems.find(item=> action.id === item.id_product)
+        let new_items = state.addedItems.filter(item=> action.id !== item.id_product)
+            
+        //calculating the total
+        let newTotal = state.total - (itemToRemove.price * itemToRemove.quantity )
+        return{
+          ...state,
+          addedItems: new_items,
+          total: newTotal
+        }
+        case 'POST_ORDER':
+            return {
+              ...state,
+              isLoading: true,
+              isRejected: false,
+              isFulfilled: false,
+            };
+        case 'POST_ORDER_REJECTED':
+            return {
+              ...state,
+              isLoading: false,
+              isRejected: true,
+            };
+        case 'POST_ORDER_FULFILLED':
+            return {
+              ...state,
+              isLoading: false,
+              isFulfilled: true,
+              orderResponse: action.payload.data,
+            };
       default:
         return state;
     }

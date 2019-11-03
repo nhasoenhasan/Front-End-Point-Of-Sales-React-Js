@@ -35,3 +35,10 @@ export const deleteProduct = (input) => {
     )
   };
 };
+
+export const postOrder=(input,total)=>{
+  return{
+      type: 'POST_ORDER',
+      payload:axios.post('http://localhost:3307/product/order',input,{headers:headers})
+  }
+}
