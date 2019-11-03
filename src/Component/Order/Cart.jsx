@@ -41,9 +41,9 @@ const Cart= (props) => {
     const handlecheckout = async(event)=>{
         event.preventDefault();
         try {
-            await props.dispatch(postOrder(input))
+            await props.dispatch(postOrder(input,Total))
         } catch (error) {
-            
+            console.log(error)
         }
     }
     

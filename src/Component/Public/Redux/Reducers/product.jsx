@@ -69,7 +69,6 @@ const initialState = {
 
       //INSIDE HOME COMPONENT
       case 'ADD_TO_CART':
-        console.log("Id Action",action.id)
         let addedItem = state.productList.find(item=> item.id_product === action.id)
             //check if the action id exists in the addedItems
         let existed_item= state.addedItems.find(item=> action.id === item.id_product)
