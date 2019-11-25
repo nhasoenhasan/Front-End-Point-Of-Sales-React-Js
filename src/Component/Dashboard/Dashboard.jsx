@@ -16,7 +16,7 @@ import { FaChartLine,FaDatabase,FaShoppingBag } from "react-icons/fa";
 import { withRouter,Route,Link } from 'react-router-dom';
 import Mproduct from '../Product/Manage/Mproduct'
 import Mcategories from '../Categories/Mcategories';
-import Cart from '../Order/Cart';
+import Cart from '../Order/Cartt';
 import Logo from "../img/Lawless_burgerbar_header.gif";
 //--------------------------[Material UI]------------------------------------
 import { makeStyles } from '@material-ui/core/styles';
@@ -34,6 +34,12 @@ import Equalizer from '@material-ui/icons/Equalizer';
 import Add from '@material-ui/icons/Add';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import InputBase from '@material-ui/core/InputBase';
+import { fade } from '@material-ui/core/styles';
+import SearchIcon from '@material-ui/icons/Search';
+import EmptyCart from '../../Assets/Images/market.png';
+
+
 
 const drawerWidth = 150;
 
@@ -62,6 +68,54 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+  },
+  imagecart: {
+    maxWidth:350,
+    maxHeight:400
+  },
+  title: {
+    flexGrow: 1,
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
+  },
+  search: {
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(1),
+      width: 'auto',
+    },
+  },
+  searchIcon: {
+    width: theme.spacing(7),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  inputRoot: {
+    color: 'inherit',
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 7),
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: 120,
+      '&:focus': {
+        width: 200,
+      },
+    },
   },
   toolbar: theme.mixins.toolbar,
 }));
@@ -108,15 +162,32 @@ const Dashboard = (props) => {
     setAnchorEl(null);
   };
 
+  
+
   return (
       <div className={classes.root}>
         <CssBaseline />
         <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <Typography variant="h6" noWrap>
-              Lawless Jakarta
-            </Typography>
-          </Toolbar>
+        <Toolbar>
+          <Typography className={classes.title} variant="h6" noWrap>
+            Lawless Burgerbar
+          </Typography>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+              onChange={handleChange("search")}
+              value={input.search}
+            />
+          </div>
+        </Toolbar>
         </AppBar>
         <Drawer
           className={classes.drawer}
@@ -135,12 +206,14 @@ const Dashboard = (props) => {
                 <ListItemText primary='Food' />
               </ListItem>
               </Link>
+              <Link  to="/dashboard/mproduct">
               <ListItem button >
                 <ListItemIcon>
                    <Equalizer />
                 </ListItemIcon>
                 <ListItemText primary='Order' />
               </ListItem>
+              </Link>
               <ListItem button onClick={handleClick}>
                 <ListItemIcon >
                    <Add />
@@ -154,8 +227,12 @@ const Dashboard = (props) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
+                <Link  to="/dashboard/mproduct">
                 <MenuItem onClick={handleClose}>Product</MenuItem>
+                </Link>
+                <Link  to="/dashboard/mcategories">
                 <MenuItem onClick={handleClose}>Categories</MenuItem>
+                </Link>
               </Menu>
           </List>
         </Drawer>
@@ -164,26 +241,11 @@ const Dashboard = (props) => {
               <Route  path='/dashboard/product' > <Productlist handleChange={handleChange}/></Route>
               <Route  path='/dashboard/mproduct' > <Mproduct/></Route>
               <Route  path='/dashboard/mcategories' > <Mcategories/></Route>
-              <Route  path='/dashboard/cart' > <Cart/></Route>
+              {/* <Route  path='/dashboard' > <Cart/></Route> */}
           </main>
-          <Drawer
-          className={classes.drawerRight}
-          variant="permanent"
-          classes={{
-            paper: classes.drawerPaperRight,
-          }}
-          anchor="right"
-        >
-          <div className={classes.toolbar} />
-          <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <Add /> : <Add />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-        </Drawer>
+
+        
+          <Route  path='/dashboard/product' > <Cart/></Route>
       </div>
       // -------------------------------------------------------------------------------------------------------- 
       // <Navbar style={{backgroundColor:"#000000"}} light className="fixed-top" expand="md"  >

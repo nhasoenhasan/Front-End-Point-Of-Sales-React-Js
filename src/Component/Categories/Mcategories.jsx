@@ -106,10 +106,10 @@ const Mcategories = (props) => {
   };
 
   return (
-    <div className="container" style={{marginTop:"9%",marginLeft:"13%"}}>
+    <div className="container" >
     <Button color="success" onClick={showModalAdd} className="ml-5 "><FaPlus/></Button>
     {/* ----------------------------------------[MODAL ADD]----------------------------------- */}
-    <Modal isOpen={modaladd} toggle={showModalAdd} className={className}>
+    <Modal isOpen={modaladd} toggle={showModalAdd} className={className} style={{marginTop:"7%"}}>
         <ModalHeader toggle={showModalAdd}>ADD Categories</ModalHeader>
         <ModalBody>
           <Form>
@@ -129,7 +129,7 @@ const Mcategories = (props) => {
       {/* ----------------------------------END MODAL ADD----------------------------------------- */}
 
       {/* ----------------------------------------[MODAL EDIT]----------------------------------- */}
-      <Modal isOpen={modaledit} toggle={showModalEdit} className={className}>
+      <Modal isOpen={modaledit} toggle={showModalEdit} className={className} style={{marginTop:"7%"}}>
           <ModalHeader toggle={showModalEdit}>EDIT Categories</ModalHeader>
           <ModalBody>
             <Form>
@@ -142,13 +142,13 @@ const Mcategories = (props) => {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="warning" onClick={handleSubmitedit}>Insert</Button>{' '}
+            <Button color="warning" onClick={handleSubmitedit}>Update</Button>{' '}
             <Button color="secondary" onClick={showModalEdit}>Cancel</Button>
           </ModalFooter>
         </Modal>
       {/* ----------------------------------END MODAL EDIT----------------------------------------- */}
     {/* -------------------------------------------MODAL DELETE------------------------------------ */}
-    <Modal className="modal-dialog modal-sm " isOpen={modaldelete} toggle={showModalDelete}>
+    <Modal className="modal-dialog modal-sm " isOpen={modaldelete} toggle={showModalDelete} style={{marginTop:"7%"}}>
           <ModalHeader  toggle={showModalDelete}>DELETE CATEGORIES</ModalHeader>
           <ModalBody>
             <Form>
@@ -162,7 +162,7 @@ const Mcategories = (props) => {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="warning" onClick={handleSubmitdelete}>Insert</Button>{' '}
+            <Button color="warning" onClick={handleSubmitdelete}>OK</Button>{' '}
             <Button color="secondary" onClick={showModalDelete}>Cancel</Button>
           </ModalFooter>
         </Modal>
