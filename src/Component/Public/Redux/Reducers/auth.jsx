@@ -50,7 +50,7 @@ const initialState = {
         };
       case 'POST_LOGIN_FULFILLED':
           const token =action.payload.data.token;
-          localStorage.setItem("x-access-token", token);
+          localStorage.setItem("xaccess-token", token);
         return {
           ...state,
           isLoading: false,

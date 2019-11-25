@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import { FaEdit,FaTrashAlt,FaPlus } from "react-icons/fa";
 import {getCategories,postCategories,patchCategories,deleteCategories} from '../Public/Redux/Actions/categories';
 
+
 const Mcategories = (props) => {
   
   const initialFormState = { id_categories:"",Categories:""};
@@ -16,6 +17,7 @@ const Mcategories = (props) => {
     className
   } = props;
   
+ 
   const [modaledit, setModaledit] = useState(false);
   const [modaladd, setModaladd] = useState(false);
   const [modaldelete, setModaldelete] = useState(false);

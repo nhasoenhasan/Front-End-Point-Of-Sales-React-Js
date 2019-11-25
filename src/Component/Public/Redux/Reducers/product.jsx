@@ -5,7 +5,8 @@ const initialState = {
     isFulfilled: false,
     addedItems:[],
     total: 0,
-    orderResponse:[]
+    orderResponse:[],
+    sub_totals:[]
   };
 
   const product = (state = initialState, action) => {
@@ -72,14 +73,14 @@ const initialState = {
         let addedItem = state.productList.find(item=> item.id_product === action.id)
             //check if the action id exists in the addedItems
         let existed_item= state.addedItems.find(item=> action.id === item.id_product)
-            
+        // console.log('REDUCERS',addedItem.price*addedItem.quantity)
         if(existed_item)
         {
             addedItem.quantity += 1 
             return{
-                ...state,
-                total: state.total + addedItem.price 
-                  }
+              ...state,
+              total: state.total + addedItem.price
+            }
         }
         else{
             addedItem.quantity = 1;

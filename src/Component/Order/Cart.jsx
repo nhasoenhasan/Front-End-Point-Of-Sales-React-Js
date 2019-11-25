@@ -1,5 +1,5 @@
 import React, { useState,useEffect} from 'react';
-import { connect } from 'react-redux'
+import { connect,useSelector,useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { removeItem,addQuantity,subtractQuantity,addToCart} from '../Public/Redux/Actions/cartActions'
 import {postOrder} from '../Public/Redux/Actions/product' 
@@ -13,16 +13,16 @@ const Cart= (props) => {
         qty:"",
     });
     
-    const [Total, setTotal]=useState({
-        sub_total:""
-    });
+    const [Total, setTotal]=useState();
+
+    const dispatch=useDispatch();
 
     useEffect(()=>{
         setInput({ ...props.items})
     },[props.items])
     
     useEffect(()=>{
-        setTotal({ sub_total:props.Total})
+        setTotal(props.Total)
     },[props.Total])
     
     const handleRemove = (id)=>{
@@ -41,11 +41,13 @@ const Cart= (props) => {
     const handlecheckout = async(event)=>{
         event.preventDefault();
         try {
-            await props.dispatch(postOrder(input,Total))
+            await dispatch(postOrder(input,Total))
         } catch (error) {
             console.log(error)
         }
     }
+
+    console.log("DATA ORDER",input)
     
     let addedItems = props.items.length ?
     (  
