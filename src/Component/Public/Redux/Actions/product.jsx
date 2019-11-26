@@ -40,7 +40,7 @@ export const deleteProduct = (input) => {
 
 export const postOrder=(order,total)=>{
   // input.push(total)
-  // console.log("DATA INPUT",order)
+  console.log("DATA INPUT",total)
   
   return{
       type: 'POST_ORDER',

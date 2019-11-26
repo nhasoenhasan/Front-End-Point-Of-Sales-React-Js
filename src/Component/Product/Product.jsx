@@ -1,11 +1,8 @@
-import React, { useState,useEffect} from 'react';
+import React, { useState} from 'react';
 import {
-  CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle,
-  Row, Col,Spinner,Form, FormGroup, Label, Input
+  Row, Col,Spinner
 } from 'reactstrap';
-import {connect} from 'react-redux';
-import { FaPlus,FaSortAmountDown,FaSortAmountUp } from 'react-icons/fa';
+import {useSelector,useDispatch} from 'react-redux';
 import { addToCart } from '../Public/Redux/Actions/cartActions';
 //----------------------------------------------------------
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,6 +13,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import DoneIcon from '@material-ui/icons/Done';
 
 
 const useStyles = makeStyles({
@@ -23,20 +21,27 @@ const useStyles = makeStyles({
     maxWidth: 200,
     minWidth:200,
     maxHeight:265,
-    minHeight:265
+    minHeight:265,
+    marginTop:20
   },
 });
 
 
-const Productlist= (props) => {
-    const classes = useStyles();
-    const initialFormState = { sort: "",
-                               order:"" };
-    const [input, setInput] = useState(initialFormState);
+  const Productlist= (props) => {
+  const classes = useStyles();
+  const initialFormState = { sort: "",
+                              order:"" };
+  const [input, setInput] = useState(initialFormState);
+  const [imgaeopacity,setimageOpacity]=useState(1)
+  const dispatch=useDispatch();
+  const products=useSelector(state=>state.product.productList)
+  
+  const handleClick = (id) =>{
+    dispatch(addToCart(id))
+  }
 
-    const handleClick = (id)=>{
-        props.addToCart(id); 
-    }
+  console.log(products.length)
+
   return (
     <div >
         <div className="form-group row " > 
@@ -53,16 +58,16 @@ const Productlist= (props) => {
           </select>
         </div>
         <Row >
-              { props.products.length==''?
+              { products.length===0?
               //When Data Loading
               <div >
                 <Spinner style={{ width: '4rem', height: '4rem',marginTop:'10rem',marginLeft:'34rem' }} />
               </div>
               :
               //When Data Availabel
-              props.products.map(item=>{
+              products.map(item=>{
                 return(
-                <Col  >
+                <Col key={item.id_product} >
                     <Card className={classes.card}>
                       <CardActionArea>
                         <CardMedia
@@ -71,7 +76,12 @@ const Productlist= (props) => {
                           height="190"
                           image={item.image}
                           title="Contemplative Reptile"
+                          style={{opacity:imgaeopacity}}
+                          onClick={()=>{handleClick(item.id_product)}}
                         />
+
+                        <DoneIcon style={{position:'absolute',color:'#015e29',left:'5rem',bottom:'10rem',fontSize: 50}}/>
+
                         <CardContent>
                           <Typography gutterBottom className="font-weight-bold" >
                             {item.name}
@@ -148,17 +158,5 @@ const Productlist= (props) => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    products: state.product.productList
-  };
-};
 
-const mapDispatchToProps= (dispatch)=>{
-    
-  return{
-      addToCart: (id)=>{dispatch(addToCart(id))}
-  }
-}
-
-export default connect (mapStateToProps,mapDispatchToProps) (Productlist);
+export default  Productlist;

@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import { FaEdit,FaTrashAlt,FaPlus } from "react-icons/fa";
 import {getCategories} from '../../Public/Redux/Actions/categories';
 import {postProduct,patchProduct,deleteProduct} from '../../Public/Redux/Actions/product';
-import { IoIosWarning } from "react-icons/io";
 
 
 const Mproduct = (props) => {
@@ -15,7 +14,6 @@ const Mproduct = (props) => {
   const [input, setInput] = useState(initialFormState);
   
   const {
-    buttonLabel,
     className
   } = props;
   
@@ -27,7 +25,7 @@ const Mproduct = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const result = await props.dispatch(postProduct(input))
+      await props.dispatch(postProduct(input))
       setModaladd(!modaladd)
     } catch (err) {
 
@@ -38,7 +36,7 @@ const Mproduct = (props) => {
   const handleSubmitedit = async (event) => {
     event.preventDefault();
     try {
-      const result = await props.dispatch(patchProduct(input))
+      await props.dispatch(patchProduct(input))
       setModaledit(!modaledit)
     } catch (err) {
 
@@ -49,7 +47,7 @@ const Mproduct = (props) => {
   const handleSubmitdelete = async (event) => {
     event.preventDefault();
     try {
-      const result = await props.dispatch(deleteProduct(input))
+      await props.dispatch(deleteProduct(input))
       setModaldelete(!modaldelete)
     } catch (err) {
 
@@ -59,7 +57,7 @@ const Mproduct = (props) => {
   //Fetch data
   const fetchddatacategories=async()=>{
     try {
-      const result = await props.dispatch(getCategories(input))
+      await props.dispatch(getCategories(input))
     } catch (err) {
 
     }
@@ -238,7 +236,7 @@ const Mproduct = (props) => {
           <ModalBody  >
             <Form>
               <FormGroup className="text-center">
-                <img  width="40%" src="https://cdn2.iconfinder.com/data/icons/weby-flat-vol-1/512/1_warning-caution-exclamation-alert-attention-error-02-512.png"></img>
+                <img alt="delete" width="40%" src="https://cdn2.iconfinder.com/data/icons/weby-flat-vol-1/512/1_warning-caution-exclamation-alert-attention-error-02-512.png"></img>
                 <p className="font-weight-bold">are you sure to delete this item? </p>
                 <Input type="hidden" name="name"  placeholder="Insert Name Product"
                 onChange={handleChange("name")}
@@ -272,7 +270,7 @@ const Mproduct = (props) => {
                     <td className="text-break col-2">{item.description}</td>
                     <td className="col-1" style={{display:"none"}}>{item.id_categories}</td>
                     <td className="col-2 text-center" type="hidden">{item.Categories}</td>
-                    <td className="col-2 text-center"><img style={{width:"70px"}} src={item.image} /></td>
+                    <td className="col-2 text-center"><img alt="product" style={{width:"70px"}} src={item.image} /></td>
                     <td className="col-2">{item.price}</td>
                     <td className="col-1">{item.quantity}</td>
                     <td className="col-1"><Button value={item.id_product} onClick={()=>updateProduct(item)} color="warning" ><FaEdit/></Button><Button value={item.id_product} onClick={()=>delProduct(item)}  className="mt-2"color="danger"><FaTrashAlt /></Button></td>

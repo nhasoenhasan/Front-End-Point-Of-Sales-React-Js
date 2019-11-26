@@ -1,18 +1,7 @@
 import React, { useEffect,useState } from 'react';
-import {
-  Collapse,Navbar,
-  NavbarToggler, NavbarBrand,
-  Nav, NavItem,
-  NavLink, UncontrolledDropdown,
-  DropdownToggle, DropdownMenu,
-  DropdownItem, ListGroup, 
-  ListGroupItem,Form,
-  Button,Input,Card,CardBody } from 'reactstrap';
 import Productlist from '../Product/Product';
 import {getProduct} from '../Public/Redux/Actions/product';
 import {connect} from 'react-redux';
-import { MdRestaurant } from "react-icons/md";
-import { FaChartLine,FaDatabase,FaShoppingBag } from "react-icons/fa";
 import { withRouter,Route,Link } from 'react-router-dom';
 import Mproduct from '../Product/Manage/Mproduct'
 import Mcategories from '../Categories/Mcategories';
@@ -37,7 +26,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import EmptyCart from '../../Assets/Images/market.png';
 
 
 
@@ -121,13 +109,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Dashboard = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
   const initialFormState = { search: "",
                              sort: "",
                               order:"" };
   const [input, setInput] = useState(initialFormState);
   const classes = useStyles();
-  const toggle = () => setIsOpen(!isOpen);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const fetchddata=async()=>{
@@ -145,10 +131,7 @@ const Dashboard = (props) => {
     fetchddata()
   },[input])
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    fetchddata()
-  };
+
 
   const handleChange = nameName => event => {
     setInput({ ...input, [nameName]: event.target.value });

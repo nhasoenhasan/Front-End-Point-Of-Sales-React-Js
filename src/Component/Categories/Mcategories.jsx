@@ -13,7 +13,6 @@ const Mcategories = (props) => {
   const [input, setInput] = useState(initialFormState);
   
   const {
-    buttonLabel,
     className
   } = props;
   
@@ -26,7 +25,7 @@ const Mcategories = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const result = await props.dispatch(postCategories(input))
+      await props.dispatch(postCategories(input))
       setModaladd(!modaladd)
     } catch (err) {
 
@@ -37,7 +36,7 @@ const Mcategories = (props) => {
   const handleSubmitedit = async (event) => {
     event.preventDefault();
     try {
-      const result = await props.dispatch(patchCategories(input))
+      await props.dispatch(patchCategories(input))
       setModaledit(!modaledit)
     } catch (err) {
 
@@ -48,7 +47,7 @@ const Mcategories = (props) => {
   const handleSubmitdelete = async (event) => {
     event.preventDefault();
     try {
-      const result = await props.dispatch(deleteCategories(input))
+      await props.dispatch(deleteCategories(input))
       setModaldelete(!modaldelete)
     } catch (err) {
 
@@ -58,7 +57,7 @@ const Mcategories = (props) => {
   //Fetch data
   const fetchddatacategories=async()=>{
     try {
-      const result = await props.dispatch(getCategories(input))
+      await props.dispatch(getCategories(input))
     } catch (err) {
 
     }
@@ -153,7 +152,7 @@ const Mcategories = (props) => {
           <ModalBody>
             <Form>
               <FormGroup className="text-center">
-                <img  width="40%" src="https://cdn2.iconfinder.com/data/icons/weby-flat-vol-1/512/1_warning-caution-exclamation-alert-attention-error-02-512.png"></img>
+                <img alt="categories image" width="40%" src="https://cdn2.iconfinder.com/data/icons/weby-flat-vol-1/512/1_warning-caution-exclamation-alert-attention-error-02-512.png"></img>
                 <p className="font-weight-bold">are you sure to delete this item? </p>
                 <Input type="hidden" name="name"  placeholder="Insert Name Categories"
                 onChange={handleChange("name")}

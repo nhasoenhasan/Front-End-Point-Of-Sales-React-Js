@@ -1,8 +1,7 @@
 import React, { useState,useEffect} from 'react';
 import { connect,useSelector,useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { removeItem,addQuantity,subtractQuantity,addToCart} from '../Public/Redux/Actions/cartActions'
-import {postOrder} from '../Public/Redux/Actions/product' 
+import {postOrder} from '../Public/Redux/Actions/product'; 
 import {Button,Row,Col} from 'reactstrap';
 import { FaPlus,FaSortAmountDown,FaSortAmountUp } from 'react-icons/fa';
 
@@ -64,7 +63,6 @@ const Cart= (props) => {
                             <Button color="warning"  className="" onClick={()=>{handleAddQuantity(item.id_product)}}><FaPlus/></Button>
                             <Button color="warning"  className="ml-2" onClick={()=>{handleSubtractQuantity(item.id_product)}}>-</Button><br/>
                             <Button color="danger"  className=" mt-2" onClick={()=>{handleRemove(item.id_product)}}>Remove</Button>
-                            
                         </div>
                         </div>
                         </Col>

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Button, Form, FormGroup, Label, Input,Alert} from 'reactstrap';
+import React, { useState} from "react";
+import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import {connect} from 'react-redux';
 import {postRegister} from '../Public/Redux/Actions/auth';
 import { Link} from "react-router-dom";
@@ -7,14 +7,12 @@ import { Link} from "react-router-dom";
 const Register = (props) => {
     const initialFormState = { username: "", password: "", email: "" };
     const [input, setInput] = useState(initialFormState);
-    const [visible, setVisible] = useState(true);
-   
-    const onDismiss = () => setVisible(false);
+    
     
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-          const result=await props.dispatch(postRegister (input))
+          await props.dispatch(postRegister (input))
         } catch (error) {
           console.log(error);
         }
@@ -29,25 +27,6 @@ const Register = (props) => {
   //  console.log("Respon>",response.status)
     return(
         <div className="container">
-         
-          {/* Alert Success Register */}
-          {/* {response.status ===200?(
-            <Alert color="success" toggle={onDismiss} isOpen={visible} fade={false}>
-            {response.message}<br/>
-            Username:{response.username}<br/>
-            Password:{response.email}<br/>
-            </Alert>):
-            (
-              ""
-            )} */}
-            {/* Alert Failed Register */}
-          {/* {response.status ===400?(
-            <Alert color="danger" toggle={onDismiss} isOpen={visible} fade={false}>
-            {response.message}<br/>
-            </Alert>):
-            (
-              ""
-            )} */}
             <div className="pr-5 p-5 m-5 mx-auto text-white  " style={{backgroundColor:"#000000",width:"40%",padding: "10px",boxShadow: "5px 10px 8px 10px #888888"}} >
             <h2 className="text-center pb-1">Register</h2>
             <Form onSubmit={handleSubmit}>
