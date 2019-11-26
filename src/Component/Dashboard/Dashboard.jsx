@@ -6,6 +6,7 @@ import { withRouter,Route,Link } from 'react-router-dom';
 import Mproduct from '../Product/Manage/Mproduct'
 import Mcategories from '../Categories/Mcategories';
 import Cart from '../Order/Cartt';
+import Historyorder from '../Order/Historyorder';
 import Logo from "../img/Lawless_burgerbar_header.gif";
 //--------------------------[Material UI]------------------------------------
 import { makeStyles } from '@material-ui/core/styles';
@@ -153,7 +154,7 @@ const Dashboard = (props) => {
         <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            Lawless Burgerbar
+            Filosofi Bakso
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -189,7 +190,7 @@ const Dashboard = (props) => {
                 <ListItemText primary='Food' />
               </ListItem>
               </Link>
-              <Link  to="/dashboard/mproduct">
+              <Link  to="/dashboard/order">
               <ListItem button >
                 <ListItemIcon>
                    <Equalizer />
@@ -199,9 +200,9 @@ const Dashboard = (props) => {
               </Link>
               <ListItem button onClick={handleClick}>
                 <ListItemIcon >
-                   <Add />
+                   <Add  style={{ fontSize: 40,color:"#00ab2e" }} />
                 </ListItemIcon>
-                <ListItemText primary='Add' />
+                <ListItemText primary='Add'  />
               </ListItem>
               <Menu
                 id="simple-menu"
@@ -224,6 +225,7 @@ const Dashboard = (props) => {
               <Route  path='/dashboard/product' > <Productlist handleChange={handleChange}/></Route>
               <Route  path='/dashboard/mproduct' > <Mproduct/></Route>
               <Route  path='/dashboard/mcategories' > <Mcategories/></Route>
+              <Route  path='/dashboard/order' > <Historyorder/></Route>
               {/* <Route  path='/dashboard' > <Cart/></Route> */}
           </main>
 
