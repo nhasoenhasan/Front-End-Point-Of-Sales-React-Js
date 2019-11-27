@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import { Line } from 'react-chartjs-2';
-
+import {getOrder} from '../Public/Redux/Actions/product';
+import { useSelector,useDispatch } from 'react-redux';
 
 const Historyorder=()=>{
+
+
+    
+    const Order=useSelector(state=>state.product.orderHistory)
+    let arrcounted_orders = [];
+    let arrmonthname_orders=[];
+    let datas=Order.data;
+   
+
+  
+
+    for(var i=0; i<datas.length; i++) {
+        arrcounted_orders.push(datas[i].counted_order);
+        arrmonthname_orders.push(datas[i].month_name);
+    }
+
     const data = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: arrmonthname_orders,
         datasets: [
           {
             label: 'Order History',
@@ -25,7 +42,7 @@ const Historyorder=()=>{
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [65, 59, 80, 81, 56, 55, 40]
+            data: arrcounted_orders
           }
         ]
       };

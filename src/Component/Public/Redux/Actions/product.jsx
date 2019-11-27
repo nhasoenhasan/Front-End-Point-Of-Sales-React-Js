@@ -39,13 +39,17 @@ export const deleteProduct = (input) => {
 };
 
 export const postOrder=(order,total)=>{
-  // input.push(total)
-  console.log("DATA INPUT",total)
-  
   return{
       type: 'POST_ORDER',
       payload:axios.post(`${process.env.REACT_APP_BASE_URL}/product/order/`,{
         total,order},
         {headers:headers})
+  }
+}
+
+export const getOrder=()=>{
+  return{
+      type: 'GET_ORDER',
+      payload:axios.get(`${process.env.REACT_APP_BASE_URL}/product/order/`,{headers:headers})
   }
 }

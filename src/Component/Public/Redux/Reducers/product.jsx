@@ -5,7 +5,8 @@ const initialState = {
     isFulfilled: false,
     addedItems:[],
     total: 0,
-    orderResponse:[]
+    orderResponse:[],
+    orderHistory:[]
   };
 
   const product = (state = initialState, action) => {
@@ -118,6 +119,7 @@ const initialState = {
             addedItems: new_items,
             total: newTotal
           }
+      //----------------[POST ORDER]-------------------------------
       case 'POST_ORDER__PENDING':
           return {
             ...state,
@@ -131,14 +133,35 @@ const initialState = {
             isLoading: false,
             isRejected: true,
           };
-        case 'POST_ORDER_FULFILLED':
-            return {
-              ...state,
-              isLoading: false,
-              isFulfilled: true,
-              orderResponse: action.payload.data,
-              addedItems:[],
-            };
+      case 'POST_ORDER_FULFILLED':
+          return {
+            ...state,
+            isLoading: false,
+            isFulfilled: true,
+            orderResponse: action.payload.data,
+            addedItems:[],
+          };
+      //-----------------------------[GET ORDER HISTORY]------------------------------
+      case 'GET_ORDER__PENDING':
+          return {
+            ...state,
+            isLoading: true,
+            isRejected: false,
+            isFulfilled: false,
+          };
+      case 'GET_ORDER_REJECTED':
+          return {
+            ...state,
+            isLoading: false,
+            isRejected: true,
+          };
+      case 'GET_ORDER_FULFILLED':
+          return {
+            ...state,
+            isLoading: false,
+            isFulfilled: true,
+            orderHistory: action.payload.data,
+          };
       default:
         return state;
     }

@@ -89,7 +89,9 @@ const Login = (props) => {
           event.preventDefault();
           try {
             const result=await props.dispatch(postLogin (input))
+            console.log(result.action.payload.data.status)
             if(result.action.payload.data.status===200){
+
               props.history.push('/dashboard/product');
             }else{
               setOpen(true);

@@ -1,4 +1,5 @@
 import React, { useEffect,useState } from 'react';
+import { useSelector,useDispatch } from 'react-redux';
 import Productlist from '../Product/Product';
 import {getProduct} from '../Public/Redux/Actions/product';
 import {connect} from 'react-redux';
@@ -7,6 +8,7 @@ import Mproduct from '../Product/Manage/Mproduct'
 import Mcategories from '../Categories/Mcategories';
 import Cart from '../Order/Cartt';
 import Historyorder from '../Order/Historyorder';
+import {getOrder} from '../Public/Redux/Actions/product';
 import Logo from "../img/Lawless_burgerbar_header.gif";
 //--------------------------[Material UI]------------------------------------
 import { makeStyles } from '@material-ui/core/styles';
@@ -27,7 +29,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-
+import Divider from '@material-ui/core/Divider';
+import Switch from '@material-ui/core/Switch';
 
 
 const drawerWidth = 150;
@@ -114,9 +117,15 @@ const Dashboard = (props) => {
                              sort: "",
                               order:"" };
   const [input, setInput] = useState(initialFormState);
+  const [state, setState] = React.useState({
+    checkedA: true,
+    checkedB: true,
+  });
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const dispatch=useDispatch();
+  
   const fetchddata=async()=>{
     await props.dispatch(getProduct (input))
     .then(result => {
@@ -128,9 +137,30 @@ const Dashboard = (props) => {
     });
   }
 
+  const handleChangeSwitch = name => event => {
+    setState({ ...state, [name]: event.target.checked });
+    const storage=localStorage.removeItem("xaccess-token");
+    console.log('Storage',storage)
+    props.history.push('/login');
+  };
+
+  const fetchddataOrder=async()=>{
+    await dispatch(getOrder())
+    .then(result => {
+      // console.log(result)
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+
   useEffect(()=>{
     fetchddata()
   },[input])
+
+  useEffect(()=>{
+    fetchddataOrder()
+  },[])
 
 
 
@@ -203,6 +233,18 @@ const Dashboard = (props) => {
                    <Add  style={{ fontSize: 40,color:"#00ab2e" }} />
                 </ListItemIcon>
                 <ListItemText primary='Add'  />
+              </ListItem>
+              <Divider />
+              <ListItem button onClick={handleClick}>
+                <ListItemIcon >
+                    <Switch
+                    checked={state.checkedA}
+                    onChange={handleChangeSwitch('checkedA')}
+                    value="checkedA"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                  />
+                </ListItemIcon>
+                <ListItemText primary='Logout'  />
               </ListItem>
               <Menu
                 id="simple-menu"

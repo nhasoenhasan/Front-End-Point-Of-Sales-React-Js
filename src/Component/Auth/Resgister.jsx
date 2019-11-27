@@ -12,7 +12,11 @@ const Register = (props) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-          await props.dispatch(postRegister (input))
+          const result=await props.dispatch(postRegister (input))
+          if(result.action.payload.data.status===200){
+            props.history.push('/login');
+          }
+
         } catch (error) {
           console.log(error);
         }
@@ -50,7 +54,7 @@ const Register = (props) => {
                 </FormGroup>
                 <div className="text-left">
                 <Button className="mb-2 bg-warning" color="warning">Register</Button><br/>
-                <Link  to="/">Signin</Link>
+                <Link  to="/login">Signin</Link>
                 </div>
             </Form>
         </div>
