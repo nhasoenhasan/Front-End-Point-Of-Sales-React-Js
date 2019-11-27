@@ -9,7 +9,7 @@ import Mcategories from '../Categories/Mcategories';
 import Cart from '../Order/Cartt';
 import Historyorder from '../Order/Historyorder';
 import {getOrder} from '../Public/Redux/Actions/product';
-import Logo from "../img/Lawless_burgerbar_header.gif";
+import FilosofiBakso from '../../Assets/Images/FilosofiBaksoFont.png';
 //--------------------------[Material UI]------------------------------------
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -41,6 +41,7 @@ const useStyles = makeStyles(theme => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    backgroundColor:'white'
   },
   drawer: {
     width: drawerWidth,
@@ -57,13 +58,19 @@ const useStyles = makeStyles(theme => ({
   drawerPaperRight: {
     width: 370,
   },
+  logo: {
+    width: 200,
+    height:70
+  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
   },
   imagecart: {
     maxWidth:350,
-    maxHeight:400
+    maxHeight:400,
+    width:300,
+    height:300
   },
   title: {
     flexGrow: 1,
@@ -98,6 +105,11 @@ const useStyles = makeStyles(theme => ({
   inputRoot: {
     color: 'inherit',
   },
+  linkmenu: {
+      color: "black",
+      textDecoration: 'none'
+  },
+
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
     transition: theme.transitions.create('width'),
@@ -183,9 +195,7 @@ const Dashboard = (props) => {
         <CssBaseline />
         <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Filosofi Bakso
-          </Typography>
+          <img alt="logo" className={classes.logo} src={FilosofiBakso}></img>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -212,12 +222,12 @@ const Dashboard = (props) => {
         >
           <div className={classes.toolbar} />
           <List>
-              <Link  to="/dashboard/product">
+              <Link className={classes.linkmenu}  to="/dashboard/product">
               <ListItem button >
                 <ListItemIcon>
                    <Fastfood />
                 </ListItemIcon>
-                <ListItemText primary='Food' />
+                <ListItemText className={classes.linkmenu} primary='Food' />
               </ListItem>
               </Link>
               <Link  to="/dashboard/order">
@@ -225,26 +235,27 @@ const Dashboard = (props) => {
                 <ListItemIcon>
                    <Equalizer />
                 </ListItemIcon>
-                <ListItemText primary='Order' />
+                <ListItemText className={classes.linkmenu} primary='Order' />
               </ListItem>
               </Link>
               <ListItem button onClick={handleClick}>
                 <ListItemIcon >
                    <Add  style={{ fontSize: 40,color:"#00ab2e" }} />
                 </ListItemIcon>
-                <ListItemText primary='Add'  />
+                <ListItemText  className={classes.linkmenu} primary='Add'  />
               </ListItem>
               <Divider />
-              <ListItem button onClick={handleClick}>
+              <ListItem style={{marginTop:'10%'}} button >
                 <ListItemIcon >
                     <Switch
+                    onChange={handleClick}
                     checked={state.checkedA}
                     onChange={handleChangeSwitch('checkedA')}
                     value="checkedA"
                     inputProps={{ 'aria-label': 'secondary checkbox' }}
                   />
                 </ListItemIcon>
-                <ListItemText primary='Logout'  />
+                <ListItemText  primary='Logout'  />
               </ListItem>
               <Menu
                 id="simple-menu"
@@ -254,10 +265,10 @@ const Dashboard = (props) => {
                 onClose={handleClose}
               >
                 <Link  to="/dashboard/mproduct">
-                <MenuItem onClick={handleClose}>Product</MenuItem>
+                <MenuItem className={classes.linkmenu} onClick={handleClose}>Product</MenuItem>
                 </Link>
                 <Link  to="/dashboard/mcategories">
-                <MenuItem onClick={handleClose}>Categories</MenuItem>
+                <MenuItem className={classes.linkmenu} onClick={handleClose}>Categories</MenuItem>
                 </Link>
               </Menu>
           </List>

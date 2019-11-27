@@ -61,7 +61,7 @@ const useStyles = makeStyles({
               { products.length===0?
               //When Data Loading
               <div >
-                <Spinner style={{ width: '4rem', height: '4rem',marginTop:'10rem',marginLeft:'34rem' }} />
+                <Spinner color="danger" style={{ width: '4rem', height: '4rem',marginTop:'10rem',marginLeft:'24rem' }} />
               </div>
               :
               //When Data Availabel
@@ -80,7 +80,7 @@ const useStyles = makeStyles({
                           onClick={()=>{handleClick(item.id_product)}}
                         />
 
-                        <DoneIcon style={{position:'absolute',color:'#015e29',left:'5rem',bottom:'10rem',fontSize: 50}}/>
+                        {/* <DoneIcon style={{position:'absolute',color:'#015e29',left:'5rem',bottom:'10rem',fontSize: 50}}/> */}
 
                         <CardContent>
                           <Typography gutterBottom className="font-weight-bold" >

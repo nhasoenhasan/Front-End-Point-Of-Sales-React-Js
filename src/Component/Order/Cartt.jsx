@@ -12,7 +12,8 @@ import RemoveCircleOutlineRoundedIcon from '@material-ui/icons/RemoveCircleOutli
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Snackbar from '@material-ui/core/Snackbar';
-import EmptyCart from '../../Assets/Images/market.png'
+import CloseIcon from '@material-ui/icons/Close';
+import EmptyCart from '../../Assets/Images/shopping_cart.png'
 
 import { useSelector,useDispatch } from 'react-redux';
 import { removeItem,addQuantity,subtractQuantity} from '../Public/Redux/Actions/cartActions';
@@ -30,9 +31,13 @@ const useStyles = makeStyles(theme => ({
       flexGrow: 1,
       padding: theme.spacing(3),
     },
+    cart:{
+      padding:'10%',
+      marginTop:'23%'
+    },
     imagecart: {
-      maxWidth:350,
-      maxHeight:400
+      maxWidth:300,
+      maxHeight:300
     },
     card: {
       display: 'flex',
@@ -141,24 +146,21 @@ const useStyles = makeStyles(theme => ({
             }}
           message={<span id="message-id">Succes Make Order</span>}
             action={[
-              <Button key="undo" color="secondary" size="small" onClick={handleClose}>
-                UNDO
-              </Button>,
               <IconButton
                 key="close"
                 aria-label="close"
-                color="inherit"
+                color="secondary"
                 className={classes.close}
                 onClick={handleClose}
               >
-                {/* <CloseIcon /> */}
+                <CloseIcon />
               </IconButton>,
             ]}
           />
           <div className={classes.toolbar} />
           <List className="text-center" style={{paddingBottom:100}}>
           {(items.length===0)?
-            <div>
+            <div className={classes.cart}>
               <img className={classes.imagecart} alt="cart" src={EmptyCart} />
               <h3 className="font-weight-bold">No Item Adedd</h3> 
             </div>
@@ -178,7 +180,7 @@ const useStyles = makeStyles(theme => ({
                 </CardContent>
                 <div className={classes.controls}>
                   <IconButton aria-label="previous" onClick={()=>{handleAddQuantity(item.id_product)}}>
-                     <AddCircleOutlineRoundedIcon /> 
+                     <AddCircleOutlineRoundedIcon style={{color:'#00ab2e'}}/> 
                   </IconButton>
                   <div className="m-2">
                   <Typography fontWeight={500} m={1}>
@@ -186,7 +188,7 @@ const useStyles = makeStyles(theme => ({
                   </Typography>
                   </div>
                   <IconButton aria-label="previous" onClick={()=>{handleSubtractQuantity(item.id_product,item.quantity)}}>
-                     <RemoveCircleOutlineRoundedIcon /> 
+                     <RemoveCircleOutlineRoundedIcon color='secondary'/> 
                   </IconButton>
                 </div>
               </div>
@@ -208,7 +210,7 @@ const useStyles = makeStyles(theme => ({
              <h6 className="font-weight-bold">Sub Total : Rp.{Totals}</h6> 
             <Button variant="contained" color="secondary"  onClick={handlecheckout} disabled={isLoading}>
                 Checkout
-                {isLoading && <CircularProgress size={24} />}
+                {isLoading && <CircularProgress color="secondary" size={24} />}
             </Button>
           </div>:
            <div></div> }
