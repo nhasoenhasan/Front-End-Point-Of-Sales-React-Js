@@ -13,7 +13,6 @@ const App = () => {
     }
     return  children
   };
-  
  
   return (
     <BrowserRouter>
@@ -21,7 +20,7 @@ const App = () => {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <RequireAuth>
-          <Route path="/dashboard/product" component={Dashboard} />
+          <Route path="/dashboard/" component={Dashboard} />
         </RequireAuth>
       </Switch>
     </BrowserRouter>

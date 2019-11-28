@@ -13,7 +13,6 @@ const Mcategories = (props) => {
   const [input, setInput] = useState(initialFormState);
   
   const {
-    buttonLabel,
     className
   } = props;
   
@@ -26,7 +25,7 @@ const Mcategories = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const result = await props.dispatch(postCategories(input))
+      await props.dispatch(postCategories(input))
       setModaladd(!modaladd)
     } catch (err) {
 
@@ -37,7 +36,7 @@ const Mcategories = (props) => {
   const handleSubmitedit = async (event) => {
     event.preventDefault();
     try {
-      const result = await props.dispatch(patchCategories(input))
+      await props.dispatch(patchCategories(input))
       setModaledit(!modaledit)
     } catch (err) {
 
@@ -48,7 +47,7 @@ const Mcategories = (props) => {
   const handleSubmitdelete = async (event) => {
     event.preventDefault();
     try {
-      const result = await props.dispatch(deleteCategories(input))
+      await props.dispatch(deleteCategories(input))
       setModaldelete(!modaldelete)
     } catch (err) {
 
@@ -58,7 +57,7 @@ const Mcategories = (props) => {
   //Fetch data
   const fetchddatacategories=async()=>{
     try {
-      const result = await props.dispatch(getCategories(input))
+      await props.dispatch(getCategories(input))
     } catch (err) {
 
     }
@@ -106,10 +105,10 @@ const Mcategories = (props) => {
   };
 
   return (
-    <div className="container" style={{marginTop:"9%",marginLeft:"13%"}}>
+    <div className="container" >
     <Button color="success" onClick={showModalAdd} className="ml-5 "><FaPlus/></Button>
     {/* ----------------------------------------[MODAL ADD]----------------------------------- */}
-    <Modal isOpen={modaladd} toggle={showModalAdd} className={className}>
+    <Modal isOpen={modaladd} toggle={showModalAdd} className={className} style={{marginTop:"7%"}}>
         <ModalHeader toggle={showModalAdd}>ADD Categories</ModalHeader>
         <ModalBody>
           <Form>
@@ -129,7 +128,7 @@ const Mcategories = (props) => {
       {/* ----------------------------------END MODAL ADD----------------------------------------- */}
 
       {/* ----------------------------------------[MODAL EDIT]----------------------------------- */}
-      <Modal isOpen={modaledit} toggle={showModalEdit} className={className}>
+      <Modal isOpen={modaledit} toggle={showModalEdit} className={className} style={{marginTop:"7%"}}>
           <ModalHeader toggle={showModalEdit}>EDIT Categories</ModalHeader>
           <ModalBody>
             <Form>
@@ -142,18 +141,18 @@ const Mcategories = (props) => {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="warning" onClick={handleSubmitedit}>Insert</Button>{' '}
+            <Button color="warning" onClick={handleSubmitedit}>Update</Button>{' '}
             <Button color="secondary" onClick={showModalEdit}>Cancel</Button>
           </ModalFooter>
         </Modal>
       {/* ----------------------------------END MODAL EDIT----------------------------------------- */}
     {/* -------------------------------------------MODAL DELETE------------------------------------ */}
-    <Modal className="modal-dialog modal-sm " isOpen={modaldelete} toggle={showModalDelete}>
+    <Modal className="modal-dialog modal-sm " isOpen={modaldelete} toggle={showModalDelete} style={{marginTop:"7%"}}>
           <ModalHeader  toggle={showModalDelete}>DELETE CATEGORIES</ModalHeader>
           <ModalBody>
             <Form>
               <FormGroup className="text-center">
-                <img  width="40%" src="https://cdn2.iconfinder.com/data/icons/weby-flat-vol-1/512/1_warning-caution-exclamation-alert-attention-error-02-512.png"></img>
+                <img alt="categories image" width="40%" src="https://cdn2.iconfinder.com/data/icons/weby-flat-vol-1/512/1_warning-caution-exclamation-alert-attention-error-02-512.png"></img>
                 <p className="font-weight-bold">are you sure to delete this item? </p>
                 <Input type="hidden" name="name"  placeholder="Insert Name Categories"
                 onChange={handleChange("name")}
@@ -162,7 +161,7 @@ const Mcategories = (props) => {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="warning" onClick={handleSubmitdelete}>Insert</Button>{' '}
+            <Button color="warning" onClick={handleSubmitdelete}>OK</Button>{' '}
             <Button color="secondary" onClick={showModalDelete}>Cancel</Button>
           </ModalFooter>
         </Modal>

@@ -6,7 +6,7 @@ const initialState = {
     addedItems:[],
     total: 0,
     orderResponse:[],
-    sub_totals:[]
+    orderHistory:[]
   };
 
   const product = (state = initialState, action) => {
@@ -109,36 +109,59 @@ const initialState = {
             total: Totalsub
         }
       case 'REMOVE_ITEM':
-        let itemToRemove= state.addedItems.find(item=> action.id === item.id_product)
-        let new_items = state.addedItems.filter(item=> action.id !== item.id_product)
-            
-        //calculating the total
-        let newTotal = state.total - (itemToRemove.price * itemToRemove.quantity )
-        return{
-          ...state,
-          addedItems: new_items,
-          total: newTotal
-        }
-        case 'POST_ORDER':
-            return {
-              ...state,
-              isLoading: true,
-              isRejected: false,
-              isFulfilled: false,
-            };
-        case 'POST_ORDER_REJECTED':
-            return {
-              ...state,
-              isLoading: false,
-              isRejected: true,
-            };
-        case 'POST_ORDER_FULFILLED':
-            return {
-              ...state,
-              isLoading: false,
-              isFulfilled: true,
-              orderResponse: action.payload.data,
-            };
+          let itemToRemove= state.addedItems.find(item=> action.id === item.id_product)
+          let new_items = state.addedItems.filter(item=> action.id !== item.id_product)
+              
+          //calculating the total
+          let newTotal = state.total - (itemToRemove.price * itemToRemove.quantity )
+          return{
+            ...state,
+            addedItems: new_items,
+            total: newTotal
+          }
+      //----------------[POST ORDER]-------------------------------
+      case 'POST_ORDER__PENDING':
+          return {
+            ...state,
+            isLoading: true,
+            isRejected: false,
+            isFulfilled: false,
+          };
+      case 'POST_ORDER_REJECTED':
+          return {
+            ...state,
+            isLoading: false,
+            isRejected: true,
+          };
+      case 'POST_ORDER_FULFILLED':
+          return {
+            ...state,
+            isLoading: false,
+            isFulfilled: true,
+            orderResponse: action.payload.data,
+            addedItems:[],
+          };
+      //-----------------------------[GET ORDER HISTORY]------------------------------
+      case 'GET_ORDER__PENDING':
+          return {
+            ...state,
+            isLoading: true,
+            isRejected: false,
+            isFulfilled: false,
+          };
+      case 'GET_ORDER_REJECTED':
+          return {
+            ...state,
+            isLoading: false,
+            isRejected: true,
+          };
+      case 'GET_ORDER_FULFILLED':
+          return {
+            ...state,
+            isLoading: false,
+            isFulfilled: true,
+            orderHistory: action.payload.data,
+          };
       default:
         return state;
     }

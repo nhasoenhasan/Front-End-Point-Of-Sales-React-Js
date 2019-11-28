@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import { FaEdit,FaTrashAlt,FaPlus } from "react-icons/fa";
 import {getCategories} from '../../Public/Redux/Actions/categories';
 import {postProduct,patchProduct,deleteProduct} from '../../Public/Redux/Actions/product';
-import { IoIosWarning } from "react-icons/io";
 
 
 const Mproduct = (props) => {
@@ -15,7 +14,6 @@ const Mproduct = (props) => {
   const [input, setInput] = useState(initialFormState);
   
   const {
-    buttonLabel,
     className
   } = props;
   
@@ -27,7 +25,7 @@ const Mproduct = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const result = await props.dispatch(postProduct(input))
+      await props.dispatch(postProduct(input))
       setModaladd(!modaladd)
     } catch (err) {
 
@@ -38,7 +36,7 @@ const Mproduct = (props) => {
   const handleSubmitedit = async (event) => {
     event.preventDefault();
     try {
-      const result = await props.dispatch(patchProduct(input))
+      await props.dispatch(patchProduct(input))
       setModaledit(!modaledit)
     } catch (err) {
 
@@ -49,7 +47,7 @@ const Mproduct = (props) => {
   const handleSubmitdelete = async (event) => {
     event.preventDefault();
     try {
-      const result = await props.dispatch(deleteProduct(input))
+      await props.dispatch(deleteProduct(input))
       setModaldelete(!modaldelete)
     } catch (err) {
 
@@ -59,7 +57,7 @@ const Mproduct = (props) => {
   //Fetch data
   const fetchddatacategories=async()=>{
     try {
-      const result = await props.dispatch(getCategories(input))
+      await props.dispatch(getCategories(input))
     } catch (err) {
 
     }
@@ -108,10 +106,10 @@ const Mproduct = (props) => {
 
   console.log(input)
   return (
-    <div className="container" style={{marginTop:"7%"}}>
-    <Button color="success" onClick={showModalAdd} className="ml-5 "><FaPlus/></Button>
+    <div className="container">
+    <Button color="success" onClick={showModalAdd} ><FaPlus/></Button>
     {/* ----------------------------------------[MODAL ADD]----------------------------------- */}
-    <Modal isOpen={modaladd} toggle={showModalAdd} className={className}>
+    <Modal isOpen={modaladd} toggle={showModalAdd} className={className}  style={{marginTop:"7%"}}>
         <ModalHeader   toggle={showModalAdd}>ADD PRODUCT</ModalHeader>
         <ModalBody>
           <Form>
@@ -173,7 +171,7 @@ const Mproduct = (props) => {
       {/* ----------------------------------END MODAL ADD----------------------------------------- */}
 
       {/* ----------------------------------------[MODAL EDIT]----------------------------------- */}
-      <Modal isOpen={modaledit} toggle={showModalEdit} className={className}>
+      <Modal isOpen={modaledit} toggle={showModalEdit} className={className} style={{marginTop:"7%"}}>
           <ModalHeader toggle={showModalEdit}>EDIT PRODUCT</ModalHeader>
           <ModalBody>
             <Form>
@@ -228,17 +226,17 @@ const Mproduct = (props) => {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="warning" onClick={handleSubmitedit}>Insert</Button>{' '}
+            <Button color="warning" onClick={handleSubmitedit}>Update</Button>{' '}
             <Button color="secondary" onClick={showModalEdit}>Cancel</Button>
           </ModalFooter>
         </Modal>
       {/* ----------------------------------END MODAL EDIT----------------------------------------- */}
     {/* -------------------------------------------MODAL DELETE------------------------------------ */}
-    <Modal isOpen={modaldelete} toggle={showModalDelete}  className="modal-dialog modal-sm ">
+    <Modal isOpen={modaldelete} toggle={showModalDelete}  className="modal-dialog modal-sm" style={{marginTop:"7%"}}>
           <ModalBody  >
             <Form>
               <FormGroup className="text-center">
-                <img  width="40%" src="https://cdn2.iconfinder.com/data/icons/weby-flat-vol-1/512/1_warning-caution-exclamation-alert-attention-error-02-512.png"></img>
+                <img alt="delete" width="40%" src="https://cdn2.iconfinder.com/data/icons/weby-flat-vol-1/512/1_warning-caution-exclamation-alert-attention-error-02-512.png"></img>
                 <p className="font-weight-bold">are you sure to delete this item? </p>
                 <Input type="hidden" name="name"  placeholder="Insert Name Product"
                 onChange={handleChange("name")}
@@ -252,7 +250,7 @@ const Mproduct = (props) => {
           </ModalFooter>
         </Modal>
         {/* --------------------------------END MODAl DELETE------------------------ */}
-    <Table  className="ml-5 pl-4 mt-3">
+    <Table  className="pl-4 mt-3">
       <thead>
         <tr className="d-flex">
           <th className="col-2 text-center">Name</th>
@@ -260,7 +258,7 @@ const Mproduct = (props) => {
           <th className="col-2 text-center">Categories</th>
           <th className="col-2 text-center">Image</th>
           <th className="col-2 ">Price</th>
-          <th className="col-2">Qty</th>
+          <th className="col-1">Qty</th>
           <th className="col-1">Action</th>
         </tr>
       </thead>
@@ -272,9 +270,9 @@ const Mproduct = (props) => {
                     <td className="text-break col-2">{item.description}</td>
                     <td className="col-1" style={{display:"none"}}>{item.id_categories}</td>
                     <td className="col-2 text-center" type="hidden">{item.Categories}</td>
-                    <td className="col-2 text-center"><img style={{width:"70px"}} src={item.image} /></td>
+                    <td className="col-2 text-center"><img alt="product" style={{width:"70px"}} src={item.image} /></td>
                     <td className="col-2">{item.price}</td>
-                    <td className="col-2">{item.quantity}</td>
+                    <td className="col-1">{item.quantity}</td>
                     <td className="col-1"><Button value={item.id_product} onClick={()=>updateProduct(item)} color="warning" ><FaEdit/></Button><Button value={item.id_product} onClick={()=>delProduct(item)}  className="mt-2"color="danger"><FaTrashAlt /></Button></td>
                 </tr>
             )
