@@ -48,9 +48,9 @@ Mobile App [Filosofi Bakso-Mart](https://github.com/aldoignatachandra/MSG-Mart-R
  
 ## Get Started 
 ### ( Localhost Version )
- 1. Download and Install RESTfull API from [MSG-Mart API](https://github.com/Derida23/PointOfSale-API-ExpressJS)
+ 1. Download and Install RESTfull API from [Filosofi Bakso-Mart API](https://github.com/Derida23/PointOfSale-API-ExpressJS)
  2. Run backend (API) in local with (xampp or other)
- 3. Git clone [MSG-Mart - React Website](https://github.com/Derida23/Easy-PointOfSale-ReactHook-Redux) or download zip
+ 3. Git clone [Filosofi Bakso-Mart - React Website](https://github.com/nhasoenhasan/Front-End-Point-Of-Sales-React-Js.git) or download zip
  4. Open in your code editor (vscode, atom or other)
  5. Install node modules with type `npm install` or `yarn install`
  6. Run App with type `npm start`
@@ -97,7 +97,3 @@ Mobile App [Filosofi Bakso-Mart](https://github.com/aldoignatachandra/MSG-Mart-R
       <image width="400" src="screenshot/order.png" />
   </span>
 </div>
-
-## License
-----
-[ISC](https://en.wikipedia.org/wiki/ISC_license "ISC")
