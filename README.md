@@ -1,68 +1,103 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">Filosofi Bakso - Mart<br>( React JS Point of Sales - Web App)</h1>
 
-## Available Scripts
+<p align="center">
+  <img src="screenshot/Icon.png" width="200"/>
+</p>
 
-In the project directory, you can run:
+<p align="center">
+<img src="https://img.shields.io/badge/material_ui-4.7.0-purple">
+<img src="https://img.shields.io/badge/material_ui_icons-4.5.1-purple"> 
+<img src="https://img.shields.io/badge/axios-0.19.0-brightgreen">
+<img src="https://img.shields.io/badge/bootstrap-4.3.1-blue">
+<img src="https://img.shields.io/badge/chart js-2.9.3-brightgreen">
+<img src="https://img.shields.io/badge/react-16.11.0-blue">
+<img src="https://img.shields.io/badge/react chartjs-2.8.0-yellow">
+<img src="https://img.shields.io/badge/react_dom-16.11.0-yellow">
+<img src="https://img.shields.io/badge/react_icons-3.8.0-orange">
+<img src="https://img.shields.io/badge/react_redux-7.1.1-orange">
+<img src="https://img.shields.io/badge/react router dom-5.1.2-purple">
+<img src="https://img.shields.io/badge/react_scripts-3.2.0-orange">
+<img src="https://img.shields.io/badge/reactstrap-8.1.1-blue">
+<img src="https://img.shields.io/badge/redux-4.0.4-blue">
+<img src="https://img.shields.io/badge/redux promise middleware-6.1.1-blue">
+<img src="https://img.shields.io/badge/victory-33.1.4-blue">
+</p>
 
-### `yarn start`
+<p align='justify'>Filosofi Bakso - Mart is an application in the form of a website and a mobile application for product management, category management and has a cashier system (point of sale), this application is made using React Js and React Native. There is only a website model in this area, if you interest and want to try the mobile app version of MSG-Mart, you can visit this link : </p> 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Mobile App [Filosofi Bakso-Mart](https://github.com/aldoignatachandra/MSG-Mart-React_Native_POS)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Features
+<b> Product Management </b>
+ - Create data table 
+ - View data product
+ - Update product
+ - Delete product
+ - Search product name, category and Latest update 
+ - Sorting product by ascending and descending
 
-### `yarn test`
+ <b> Category Management </b>
+ - Create data table 
+ - View data category
+ - Update category
+ - Delete category
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<b> Transaction </b>
+- Make Transaction
+- Edit Quantity
+ 
+## Get Started 
+### ( Localhost Version )
+ 1. Download and Install RESTfull API from [MSG-Mart API](https://github.com/Derida23/PointOfSale-API-ExpressJS)
+ 2. Run backend (API) in local with (xampp or other)
+ 3. Git clone [MSG-Mart - React Website](https://github.com/Derida23/Easy-PointOfSale-ReactHook-Redux) or download zip
+ 4. Open in your code editor (vscode, atom or other)
+ 5. Install node modules with type `npm install` or `yarn install`
+ 6. Run App with type `npm start`
 
-### `yarn build`
+ ### ( Online Version )
+ 1. Prepare your internet and browser 
+ 2. You can visit this [LINK](https://msg-mart.netlify.com/) for Filosofi Bakso-Mart online web app version
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ ## Build with React Hooks & Redux
+ <img width="390" height="190" src="https://miro.medium.com/max/966/1*jYy3Hc1qmQL9gpYF5rI3Sg.png">
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+ ## Screenshot from the App
+<div align='center'>
+  <h3>Login Page</h3>
+  <span>
+      <image width="400" src="screenshot/Login.png" />
+  </span>
+  <h3>Register Page</h3>
+  <span>
+      <image width="400" src="screenshot/Register.png" />
+  </span>
+  <h3>Dashboard Page</h3>
+  <span>
+      <image width="400" src="screenshot/Dashboard.png" />
+  </span>
+  <h3>Order History Page</h3>
+  <span>
+      <image width="400" src="screenshot/OrderHistory.png" />
+  </span>
+  <h3>Manage Product Page</h3>
+  <span>
+      <image width="400" src="screenshot/ManageProduct.png" />
+  </span>
+  <h3>Manage Categories Page</h3>
+  <span>
+      <image width="400" src="screenshot/ManageCategories.png" />
+  </span>
+  <h3>Make an Order Page</h3>
+  <span>
+      <image width="400" src="screenshot/MakeOrder.png" />
+  </span>
+  <h3>Success Make an Order Page</h3>
+  <span>
+      <image width="400" src="screenshot/order.png" />
+  </span>
+</div>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## License
+----
+[ISC](https://en.wikipedia.org/wiki/ISC_license "ISC")
