@@ -18,7 +18,7 @@ import Container from '@material-ui/core/Container';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import FilosofiBakso from '../../Assets/Images/FilosofiBaksoFont.png';
+import CoffeMountain from '../../Assets/Images/CoffeMountain.png';
 
 
 
@@ -27,7 +27,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Filosofi Bakso
+        Coffe Mountain
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -144,7 +144,7 @@ const Login = (props) => {
             </div>
           <CssBaseline />
           <div className={classes.paper}>
-            <img alt="logo" className={classes.logo} src={FilosofiBakso}></img>
+            <img alt="logo" className={classes.logo} src={CoffeMountain}></img>
             <form className={classes.form} noValidate>
               <TextField
                 variant="outlined"

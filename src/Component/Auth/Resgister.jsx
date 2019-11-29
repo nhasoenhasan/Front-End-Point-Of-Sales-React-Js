@@ -17,7 +17,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
-import FilosofiBakso from '../../Assets/Images/FilosofiBaksoFont.png';
+import CoffeMountain from '../../Assets/Images/CoffeMountain.png';
 import CloseIcon from '@material-ui/icons/Close';
 
 function Copyright() {
@@ -25,7 +25,7 @@ function Copyright() {
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
         <Link color="inherit" href="https://material-ui.com/">
-          Filosofi Bakso
+          Coffe Mountain
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}
@@ -140,7 +140,7 @@ const Register = (props) => {
             </div>
         <CssBaseline />
         <div className={classes.paper}> 
-            <img alt="logo" className={classes.logo} src={FilosofiBakso}></img>
+            <img alt="logo" className={classes.logo} src={CoffeMountain}></img>
             {/* <Typography component="h1" variant="h5" fontWeight="fontWeightBold" letterSpacing={6} m={1}>
             Sign Up
             </Typography> */}

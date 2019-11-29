@@ -9,7 +9,7 @@ import Mcategories from '../Categories/Mcategories';
 import Cart from '../Order/Cartt';
 import Historyorder from '../Order/Historyorder';
 import {getOrder} from '../Public/Redux/Actions/product';
-import FilosofiBakso from '../../Assets/Images/FilosofiBaksoFont.png';
+import CoffeMountain from '../../Assets/Images/CoffeMountain.png';
 //--------------------------[Material UI]------------------------------------
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -59,7 +59,7 @@ const useStyles = makeStyles(theme => ({
     width: 370,
   },
   logo: {
-    width: 200,
+    width: 150,
     height:70
   },
   content: {
@@ -195,7 +195,7 @@ const Dashboard = (props) => {
         <CssBaseline />
         <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <img alt="logo" className={classes.logo} src={FilosofiBakso}></img>
+          <img alt="logo" className={classes.logo} src={CoffeMountain}></img>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />

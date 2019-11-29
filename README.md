@@ -1,7 +1,7 @@
-<h1 align="center">Filosofi Bakso - Mart<br>( React JS Point of Sales - Web App)</h1>
+<h1 align="center">Coffe Mountain<br>( React JS Point of Sales - Web App)</h1>
 
 <p align="center">
-  <img src="src/Assets/Images/FilosofiBaksoFont.png" width="200"/>
+  <img src="src/Assets/Images/CoffeMountain.png" width="200"/>
 </p>
 
 <p align="center">
@@ -23,9 +23,9 @@
 <img src="https://img.shields.io/badge/victory-33.1.4-blue">
 </p>
 
-<p align='justify'>Filosofi Bakso - Mart is an application in the form of a website and a mobile application for product management, category management and has a cashier system (point of sale), this application is made using React Js and React Native. There is only a website model in this area, if you interest and want to try the mobile app version of MSG-Mart, you can visit this link : </p> 
+<p align='justify'>Coffe Mountain is an application in the form of a website and a mobile application for product management, category management and has a cashier system (point of sale), this application is made using React Js and React Native. There is only a website model in this area, if you interest and want to try the mobile app version of MSG-Mart, you can visit this link : </p> 
 
-Mobile App [Filosofi Bakso-Mart](https://github.com/aldoignatachandra/MSG-Mart-React_Native_POS)
+Mobile App [Coffe Mountain](https://github.com/aldoignatachandra/MSG-Mart-React_Native_POS)
 
 ## Features
 <b> Product Management </b>
@@ -48,16 +48,16 @@ Mobile App [Filosofi Bakso-Mart](https://github.com/aldoignatachandra/MSG-Mart-R
  
 ## Get Started 
 ### ( Localhost Version )
- 1. Download and Install RESTfull API from [Filosofi Bakso-Mart API](https://github.com/Derida23/PointOfSale-API-ExpressJS)
+ 1. Download and Install RESTfull API from [Coffe Mountain API](https://github.com/Derida23/PointOfSale-API-ExpressJS)
  2. Run backend (API) in local with (xampp or other)
- 3. Git clone [Filosofi Bakso-Mart - React Website](https://github.com/nhasoenhasan/Front-End-Point-Of-Sales-React-Js.git) or download zip
+ 3. Git clone [Coffe Mountain - React Website](https://github.com/nhasoenhasan/Front-End-Point-Of-Sales-React-Js.git) or download zip
  4. Open in your code editor (vscode, atom or other)
  5. Install node modules with type `npm install` or `yarn install`
  6. Run App with type `npm start`
 
  ### ( Online Version )
  1. Prepare your internet and browser 
- 2. You can visit this [LINK](https://msg-mart.netlify.com/) for Filosofi Bakso-Mart online web app version
+ 2. You can visit this [LINK](https://msg-mart.netlify.com/) for Coffe Mountain online web app version
 
  ## Build with React Hooks & Redux
  <img width="390" height="190" src="https://miro.medium.com/max/966/1*jYy3Hc1qmQL9gpYF5rI3Sg.png">
@@ -88,12 +88,8 @@ Mobile App [Filosofi Bakso-Mart](https://github.com/aldoignatachandra/MSG-Mart-R
   <span>
       <image width="400" src="screenshot/ManageCategories.png" />
   </span>
-  <h3>Make an Order Page</h3>
+  <h3>Cart Page</h3>
   <span>
-      <image width="400" src="screenshot/MakeOrder.png" />
-  </span>
-  <h3>Success Make an Order Page</h3>
-  <span>
-      <image width="400" src="screenshot/order.png" />
+      <image width="400" src="screenshot/Cart.png" />
   </span>
 </div>
