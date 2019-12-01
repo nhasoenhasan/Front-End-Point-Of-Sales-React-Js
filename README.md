@@ -48,7 +48,7 @@ Mobile App [Coffe Mountain](https://github.com/aldoignatachandra/MSG-Mart-React_
  
 ## Get Started 
 ### ( Localhost Version )
- 1. Download and Install RESTfull API from [Coffe Mountain API](https://github.com/Derida23/PointOfSale-API-ExpressJS)
+ 1. Download and Install RESTfull API from [Coffe Mountain API](https://github.com/nhasoenhasan/RESTful-API-for-Point-Of-Sales-App)
  2. Run backend (API) in local with (xampp or other)
  3. Git clone [Coffe Mountain - React Website](https://github.com/nhasoenhasan/Front-End-Point-Of-Sales-React-Js.git) or download zip
  4. Open in your code editor (vscode, atom or other)
@@ -57,7 +57,7 @@ Mobile App [Coffe Mountain](https://github.com/aldoignatachandra/MSG-Mart-React_
 
  ### ( Online Version )
  1. Prepare your internet and browser 
- 2. You can visit this [LINK](https://msg-mart.netlify.com/) for Coffe Mountain online web app version
+ 2. You can visit this [LINK](https://coffe-mountain.netlify.com) for Coffe Mountain online web app version
 
  ## Build with React Hooks & Redux
  <img width="390" height="190" src="https://miro.medium.com/max/966/1*jYy3Hc1qmQL9gpYF5rI3Sg.png">
