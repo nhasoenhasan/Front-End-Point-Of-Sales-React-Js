@@ -35,6 +35,7 @@ const useStyles = makeStyles({
   const [imgaeopacity,setimageOpacity]=useState(1)
   const dispatch=useDispatch();
   const products=useSelector(state=>state.product.productList)
+  const isLoading=useSelector(state=>state.product.isLoading)
   
   const handleClick = (id) =>{
     dispatch(addToCart(id))
@@ -58,7 +59,7 @@ const useStyles = makeStyles({
           </select>
         </div>
         <Row >
-              { products.length===0?
+              { isLoading===true?
               //When Data Loading
               <div >
                 <Spinner color="danger" style={{ width: '4rem', height: '4rem',marginTop:'10rem',marginLeft:'24rem' }} />

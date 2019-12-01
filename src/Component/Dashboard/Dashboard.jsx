@@ -222,7 +222,7 @@ const Dashboard = (props) => {
         >
           <div className={classes.toolbar} />
           <List>
-              <Link className={classes.linkmenu}  to="/dashboard/product">
+              <Link className={classes.linkmenu}  to="/dashboard">
               <ListItem button >
                 <ListItemIcon>
                    <Fastfood />
@@ -275,7 +275,7 @@ const Dashboard = (props) => {
         </Drawer>
           <main className={classes.content}>
             <div className={classes.toolbar} />
-              <Route  path='/dashboard/product' > <Productlist handleChange={handleChange}/></Route>
+              <Route exact path='/dashboard' > <Productlist handleChange={handleChange}/></Route>
               <Route  path='/dashboard/mproduct' > <Mproduct/></Route>
               <Route  path='/dashboard/mcategories' > <Mcategories/></Route>
               <Route  path='/dashboard/order' > <Historyorder/></Route>
@@ -283,7 +283,7 @@ const Dashboard = (props) => {
           </main>
 
         
-          <Route  path='/dashboard/product' > <Cart/></Route>
+          <Route exact path='/dashboard' > <Cart/></Route>
       </div>
       // -------------------------------------------------------------------------------------------------------- 
       // <Navbar style={{backgroundColor:"#000000"}} light className="fixed-top" expand="md"  >
