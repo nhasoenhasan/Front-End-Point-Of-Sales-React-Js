@@ -20,7 +20,10 @@ const App = () => {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <RequireAuth>
-          <Route path="/dashboard/" component={Dashboard} />
+          <Route exact path="/" >
+            <Redirect to={"/dashboard"} />
+          </Route>
+          <Route path="/dashboard" component={Dashboard} />
         </RequireAuth>
       </Switch>
     </BrowserRouter>

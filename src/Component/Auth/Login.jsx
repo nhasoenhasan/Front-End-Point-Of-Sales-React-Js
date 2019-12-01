@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import { Link} from "react-router-dom";
 import {connect,useSelector} from 'react-redux';
 import {postLogin} from '../Public/Redux/Actions/auth';
-
+import {Redirect} from 'react-router-dom';
 //------------------[Material UI]----------------------------------------
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -92,10 +92,10 @@ const Login = (props) => {
           event.preventDefault();
           try {
             const result=await props.dispatch(postLogin (input))
-            console.log(result.action.payload.data.status)
+            console.log('PROPS',props.history)
             if(result.action.payload.data.status===200){
-
-              props.history.push('/dashboard/product');
+              props.history.push('/dashboard');
+             
             }else{
               setOpen(true);
             }
