@@ -1,10 +1,8 @@
 import React,{useState} from "react";
-import { Link} from "react-router-dom";
 import {connect,useSelector} from 'react-redux';
 import {postLogin} from '../Public/Redux/Actions/auth';
-import {Redirect} from 'react-router-dom';
-//------------------[Material UI]----------------------------------------
-import Avatar from '@material-ui/core/Avatar';
+import {Link,withRouter,Redirect} from 'react-router-dom';
+//------------------[Material UI]----------------------------------------\
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -22,18 +20,18 @@ import CoffeMountain from '../../Assets/Images/CoffeMountain.png';
 
 
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Coffe Mountain
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+// function Copyright() {
+//   return (
+//     <Typography variant="body2" color="textSecondary" align="center">
+//       {'Copyright © '}
+//       <Link color="inherit" href="https://material-ui.com/">
+//         Coffe Mountain
+//       </Link>{' '}
+//       {new Date().getFullYear()}
+//       {'.'}
+//     </Typography>
+//   );
+// }
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -74,7 +72,6 @@ const Login = (props) => {
     const [input, setInput] = useState(initialFormState);
     const [open, setOpen] = useState(false);
     const classes = useStyles();
-
     const loginMessage = useSelector(state => state.auth.loginMessage)
     const isLoading = useSelector(state => state.auth.isLoading)
 
@@ -85,6 +82,7 @@ const Login = (props) => {
       setOpen(false);
     };
 
+    console.log( props.history)
     const handleSubmit = async (event) => {
         if(input.username===''||input.username===''){
           setOpen(true);
@@ -92,10 +90,10 @@ const Login = (props) => {
           event.preventDefault();
           try {
             const result=await props.dispatch(postLogin (input))
-            console.log('PROPS',props.history)
+            
             if(result.action.payload.data.status===200){
-              props.history.push('/dashboard');
-             
+              props.history.push("/dashboard");
+              // return <Redirect to={"/dashboard"} />
             }else{
               setOpen(true);
             }
@@ -193,9 +191,9 @@ const Login = (props) => {
               </Grid>
             </form>
           </div>
-          <Box mt={8}>
+          {/* <Box mt={8}>
             <Copyright />
-          </Box>
+          </Box> */}
         </Container>
     );
 };
@@ -208,5 +206,5 @@ const mapStateToProps = state => {
     };
   };
 
-export default connect (mapStateToProps)(Login);
+export default withRouter(connect (mapStateToProps)(Login));
 

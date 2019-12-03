@@ -79,6 +79,7 @@ const useStyles = makeStyles(theme => ({
 
     const items=useSelector(state=>state.product.addedItems)
     const Totals=useSelector(state=>state.product.total)
+    const token=useSelector(state=>state.auth.Token)
     
     useEffect(()=>{
       setInput({ ...items})
@@ -106,7 +107,7 @@ const useStyles = makeStyles(theme => ({
         setisLoading(true)
         event.preventDefault();
         try {
-             const result =await dispatch(postOrder(input,Total))
+             const result =await dispatch(postOrder(input,Total,token))
              if(result.action.payload.data.status===200){
               setOpen(true);
               setisLoading(false)
