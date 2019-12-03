@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+  import React, { useEffect,useState } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import Productlist from '../Product/Product';
 import {getProduct} from '../Public/Redux/Actions/product';
@@ -137,9 +137,10 @@ const Dashboard = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const dispatch=useDispatch();
+  const token=useSelector(state=>state.auth.Token)
   
   const fetchddata=async()=>{
-    await props.dispatch(getProduct (input))
+    await props.dispatch(getProduct (input,token))
     .then(result => {
       // console.log("Input",input)
       // console.log("Hasil",result)
@@ -157,7 +158,7 @@ const Dashboard = (props) => {
   };
 
   const fetchddataOrder=async()=>{
-    await dispatch(getOrder())
+    await dispatch(getOrder(token))
     .then(result => {
       // console.log(result)
     })
@@ -279,43 +280,9 @@ const Dashboard = (props) => {
               <Route  path='/dashboard/mproduct' > <Mproduct/></Route>
               <Route  path='/dashboard/mcategories' > <Mcategories/></Route>
               <Route  path='/dashboard/order' > <Historyorder/></Route>
-              {/* <Route  path='/dashboard' > <Cart/></Route> */}
           </main>
-
-        
           <Route exact path='/dashboard' > <Cart/></Route>
       </div>
-      // -------------------------------------------------------------------------------------------------------- 
-      // <Navbar style={{backgroundColor:"#000000"}} light className="fixed-top" expand="md"  >
-      //   <NavbarBrand className="text-white" href="/"><img width="15%" src="http://lawlessjakarta.com/wp-content/uploads/2017/09/Lawless_burgerbar_header.gif"/></NavbarBrand><img style={{marginRight:"27%"}} width="15%" src={Logo}/>
-        
-      //   <NavbarToggler style={{backgroundColor:"white"}} onClick={toggle} />
-        
-      //   <Collapse  isOpen={isOpen} navbar>
-      //     <Nav className="ml-auto " navbar>
-      //       <Form className="form-inline my-2 my-lg-0">
-      //       <Input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
-      //       onChange={handleChange("search")}
-      //       value={input.search}></Input>
-      //     </Form>
-      //     </Nav>
-      //   </Collapse>
-      //   <Link to="/dashboard/cart" className="text-white mr-3 ml-3"><FaShoppingBag/></Link>
-      // </Navbar>
-      // <div className="d-flex flex-row" >
-      //   <ListGroup className="font-weight-bold text-white" style={{width:"11%",position:"fixed",height:"100%",marginTop:"5%",backgroundColor:"#f5ad3f"}}>
-      //     <Link  to="/dashboard/product"><ListGroupItem style={{backgroundColor:"#f5ad3f",color:"black"}}><MdRestaurant/>Food</ListGroupItem>
-      //     <ListGroupItem style={{backgroundColor:"#f5ad3f",color:"black"}}><FaChartLine/>Order</ListGroupItem></Link>
-      //     <Link to="/dashboard/mcategories"><ListGroupItem style={{backgroundColor:"#f5ad3f",color:"black"}}><FaDatabase/>Categories</ListGroupItem></Link>
-      //     <Link to="/dashboard/mproduct"><ListGroupItem style={{backgroundColor:"#f5ad3f",color:"black"}}><FaDatabase/>Product</ListGroupItem></Link>
-      //   </ListGroup>
-      // </div>
-      // <Route  path='/dashboard/product' > <Productlist handleChange={handleChange}/></Route>
-      // <Route  path='/dashboard/mproduct' > <Mproduct/></Route>
-      // <Route  path='/dashboard/mcategories' > <Mcategories/></Route>
-      // <Route  path='/dashboard/cart' > <Cart/></Route>
-      // <div>
-      // </div>
   );
 }
 const mapStateToProps = state => {

@@ -2,7 +2,7 @@ const initialState = {
     registerResponse: [],
     registerMessage:'',
     registerStatus:'',
-    //Login
+    Token:'',
     loginResponse: [],
     loginMessage:'',
     loginStatus:'',
@@ -56,7 +56,8 @@ const initialState = {
           isLoading: false,
           isFulfilled: true,
           loginMessage: action.payload.data.message,
-          loginStatus:action.payload.data.status
+          loginStatus:action.payload.data.status,
+          Token:action.payload.data.token
         };  
      
       default:

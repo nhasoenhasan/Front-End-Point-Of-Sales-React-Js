@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import { Table,Button, Modal, ModalHeader, ModalBody, ModalFooter,
          Form, FormGroup, Label, Input, } from 'reactstrap';
-import {connect} from 'react-redux';
+import {connect,useSelector} from 'react-redux';
 import { FaEdit,FaTrashAlt,FaPlus } from "react-icons/fa";
 import {getCategories} from '../../Public/Redux/Actions/categories';
 import {postProduct,patchProduct,deleteProduct} from '../../Public/Redux/Actions/product';
@@ -20,12 +20,13 @@ const Mproduct = (props) => {
   const [modaledit, setModaledit] = useState(false);
   const [modaladd, setModaladd] = useState(false);
   const [modaldelete, setModaldelete] = useState(false);
+  const token=useSelector(state=>state.auth.Token)
 
   //Button Input Clicked!
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await props.dispatch(postProduct(input))
+      await props.dispatch(postProduct(input,token))
       setModaladd(!modaladd)
     } catch (err) {
 
@@ -36,7 +37,7 @@ const Mproduct = (props) => {
   const handleSubmitedit = async (event) => {
     event.preventDefault();
     try {
-      await props.dispatch(patchProduct(input))
+      await props.dispatch(patchProduct(input,token))
       setModaledit(!modaledit)
     } catch (err) {
 
@@ -47,7 +48,7 @@ const Mproduct = (props) => {
   const handleSubmitdelete = async (event) => {
     event.preventDefault();
     try {
-      await props.dispatch(deleteProduct(input))
+      await props.dispatch(deleteProduct(input,token))
       setModaldelete(!modaldelete)
     } catch (err) {
 
@@ -57,7 +58,7 @@ const Mproduct = (props) => {
   //Fetch data
   const fetchddatacategories=async()=>{
     try {
-      await props.dispatch(getCategories(input))
+      await props.dispatch(getCategories(input,token))
     } catch (err) {
 
     }

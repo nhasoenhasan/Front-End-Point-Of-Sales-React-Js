@@ -25,11 +25,3 @@ export const addQuantity=(id)=>{
         id
     }
 }
-
-//add qt action
-// export const postOrder=(input,total)=>{
-//     return{
-//         type: 'POST_ORDER',
-//         payload:axios.post('http://localhost:3307/product/order',input,{headers:headers})
-//     }
-// }
