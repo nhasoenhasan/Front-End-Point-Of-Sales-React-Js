@@ -58,7 +58,14 @@ const initialState = {
           loginMessage: action.payload.data.message,
           loginStatus:action.payload.data.status,
           Token:action.payload.data.token
-        };  
+        };
+      case 'SET_TOKEN':
+        return {
+          ...state,
+          isLoading: false,
+          isFulfilled: true,
+          Token:action.payload
+        };
      
       default:
         return state;
