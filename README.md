@@ -25,7 +25,7 @@
 
 <p align='justify'>Coffe Mountain is an application in the form of a website and a mobile application for product management, category management and has a cashier system (point of sale), this application is made using React Js and React Native. There is only a website model in this area, if you interest and want to try the mobile app version of MSG-Mart, you can visit this link : </p> 
 
-Mobile App [Coffe Mountain](https://github.com/aldoignatachandra/MSG-Mart-React_Native_POS)
+Mobile App [Coffe Mountain](https://github.com/nhasoenhasan/React-Native-Point-Of-sales)
 
 ## Features
 <b> Product Management </b>
