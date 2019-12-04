@@ -57,7 +57,7 @@ Mobile App [Coffe Mountain](https://github.com/nhasoenhasan/React-Native-Point-O
 
  ### ( Online Version )
  1. Prepare your internet and browser 
- 2. You can visit this [LINK](https://coffe-mountain.netlify.com) for Coffe Mountain online web app version
+ 2. You can visit this [LINK](https://coffemountain.herokuapp.com) for Coffe Mountain online web app version
 
  ## Build with React Hooks & Redux
  <img width="390" height="190" src="https://miro.medium.com/max/966/1*jYy3Hc1qmQL9gpYF5rI3Sg.png">
