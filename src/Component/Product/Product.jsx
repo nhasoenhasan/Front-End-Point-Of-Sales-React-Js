@@ -14,7 +14,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import DoneIcon from '@material-ui/icons/Done';
-
+import Lost from '../../Assets/Images/lost.png';
 
 const useStyles = makeStyles({
   card: {
@@ -63,6 +63,11 @@ const useStyles = makeStyles({
               //When Data Loading
               <div >
                 <Spinner color="danger" style={{ width: '4rem', height: '4rem',marginTop:'10rem',marginLeft:'24rem' }} />
+              </div>
+              :
+              products.length===0 && isLoading === false?
+              <div style={{marginLeft:'10rem'}}>
+                <img alt='notfound' src={Lost} />
               </div>
               :
               //When Data Availabel
