@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter,withRouter,Route,Switch,Redirect} from 'react-router-dom';
+import {withRouter,Route,Switch,Redirect} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Login from './Component/Auth/Login';
 import Register from './Component/Auth/Resgister';

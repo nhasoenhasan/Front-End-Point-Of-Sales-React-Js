@@ -1,10 +1,8 @@
 import React, { useState} from "react";
-import { Form, FormGroup, Label, Input} from 'reactstrap';
 import {connect,useSelector} from 'react-redux';
 import {postRegister} from '../Public/Redux/Actions/auth';
 import { Link} from "react-router-dom";
 //------------------[Material UI]----------------------------------------
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -24,9 +22,7 @@ function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-          Coffe Mountain
-        </Link>{' '}
+        
         {new Date().getFullYear()}
         {'.'}
       </Typography>

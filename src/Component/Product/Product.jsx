@@ -13,7 +13,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import DoneIcon from '@material-ui/icons/Done';
 import Lost from '../../Assets/Images/lost.png';
 
 const useStyles = makeStyles({
@@ -32,7 +31,6 @@ const useStyles = makeStyles({
   const initialFormState = { sort: "",
                               order:"" };
   const [input, setInput] = useState(initialFormState);
-  const [imgaeopacity,setimageOpacity]=useState(1)
   const dispatch=useDispatch();
   const products=useSelector(state=>state.product.productList)
   const isLoading=useSelector(state=>state.product.isLoading)
@@ -82,12 +80,8 @@ const useStyles = makeStyles({
                           height="190"
                           image={item.image}
                           title="Contemplative Reptile"
-                          style={{opacity:imgaeopacity}}
                           onClick={()=>{handleClick(item.id_product)}}
                         />
-
-                        {/* <DoneIcon style={{position:'absolute',color:'#015e29',left:'5rem',bottom:'10rem',fontSize: 50}}/> */}
-
                         <CardContent>
                           <Typography gutterBottom className="font-weight-bold" >
                             {item.name}
